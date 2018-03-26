@@ -1,0 +1,329 @@
+        <footer class="footer">
+            <section class="wechat-box mt05">
+                <div class="wechat-tit"><em class="icon-font iconfont-wechat icon-wechat"></em>关注微信号</div>
+                <div class="wechat-con clear" style="font-size: 12px;">
+                    <img src="/m/images/pocketring-qrcode.jpg">
+                    <p>找铃、玩铃、享铃……定期还有小福利（呲牙），关注下又不掉肉~！<br>微信号：口袋铃声</p>
+                </div>
+            </section>
+            <section class="clear mt05em brt">
+            <%if(foot.download){%>
+                <div class="xl-logo fl"><i class="iconfont-xl icon_logo fl"></i><p class="fl">百万高清彩铃/来电铃<br>在线制作DIY个性化铃声</p></div>
+                <div class="fr footbtn"><a href="http://www.tianyiring.com/" class="btn"><span class="iconfont-xl icon_down"></span>下载APP</a></div>
+            </section>
+            <section class="clear mt05em brt">
+            <%}%>
+                <div class="fl fotinfo">
+                    <p>客服电话：<span>400-1515-742</span></p>
+                    <p>客服邮箱：<span>2689506586@qq.com</span></p>
+                    <p>客服QQ：<span>2689506586</span></p>
+                </div>
+                <div>
+                    <a href="/m/feedback.html" class="btn">意见反馈</a>
+                </div>
+            </section>
+            <%if(foot.ringbox){%>
+            <section class="clear mt05em brt wling-box">
+                <div class="fl ws_logo">
+                    <img src="/m/images/ws_logo.png" class="fl">
+                    <h3><b>微商铃</b>－您的专属商务彩铃顾问</h3>
+                    <p>全球20万商家的选择，您值得信赖</p>
+                </div>
+                <div><a href="http://www.ringbox.com.cn/" target="_blank" class="btn">了解更多</a></div>
+            </section>
+            <%}%>
+            <section class="clear mt05em brt flow-box">
+                <a href="https://p.ringbox.cn/pay/flow/1001"> <img src="/m/images/ban-flow.jpg"></a>
+            </section>
+            <script>
+                var hrefValue = window.location.href;
+                if(hrefValue.indexOf("www.9fan.cn") > 0){
+                    $('www_css').find('a').attr('key','5837b505efbfb01d24bd39b8')
+                }
+                else if(hrefValue.indexOf("s.9fan.cn") > 0){
+                    $('www_css').find('a').attr('key','5837b541efbfb014cd569b65')
+                }
+            </script>
+            <style>
+                .www_css{display: inline-block;margin:5px 0 0 5px}
+            </style>
+            <section class="copyright clear">
+                <div class="foot-logo"><img src="/m/images/logo-migu.png"><img src="/m/images/logo-wo.png"><img src="/m/images/logo-ai.png" class="logo-ai"> </div>
+                <div style="display: inline-block">
+                    <div class="beian-info"><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602001087"><img src="/m/images/beian.png" class="beian-img"/><em>浙公网安备 33010602001087号</em></a></div>
+                    <p>浙B2-20100005&nbsp;&nbsp;&nbsp;&nbsp;杭州祖玛科技有限公司</p>
+                </div>
+                <div class="www_css"><a key ="" logo_size="83x30" logo_type="realname" href="http://www.anquan.org"><script src="//static.anquan.org/static/outer/js/aq_auth.js"></script></a></div>
+            </section>
+        </footer>
+    </div>
+</div>
+<div id="float-tips" style="display: none">
+    <i class="icon-font iconfont-share share-tips"></i>
+    <div class="float-tips-inner">选择“添加到主屏幕”或“收藏”，我就是你的！最新最热最逗铃声一键到达！</div>
+    <em class="icon-font iconfont-close close-tips"></em>
+</div>
+<div id="mask-layer"></div>
+<div id="pop-waiting-layer">
+    <div class="anim">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <span>加载中，请稍后……</span>
+</div>
+<div id="pop-checking-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="ipbox">
+            <p class="clear">
+                <input id="txt-phone" type="tel" placeholder="请输入手机号" class="numip" maxlength="11"></p>
+            <p class="clear">
+                <input id="txt-checkcode" type="tel" placeholder="请输入验证码" class="maip" maxlength="6"><a id="btn-getcode" href="javascript:;" class="getma">获取短信验证码</a></p>
+        </div>
+        <div class="ipbtn">
+            <button id="btn-check" type="button" class="onlybtns">确认</button>
+        </div>
+        <div class="wzcon">
+            <p id="explain"></p>
+        </div>
+    </div>
+</div>
+<div id="pop-msg-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<div id="pop-del-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<div id="slid-layer" class="slid-layer">
+    <div class="slider-inner">
+        <div class="t">
+            <span></span>
+            <div class="icon-font iconfont-back btn-back"></div>
+        </div>
+        <div class="musics clear"></div>
+        <div class="member-tip"></div>
+        <div class="c">
+            <div class="checking">
+                <p class="clear" id="phone-verifi">
+                    <!--<i class="icon-font iconfont-phone"></i>-->
+                    <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+                </p>
+                <p class="clear" id="code-verifi">
+                    <!--<i class="icon-font iconfont-sms"></i>-->
+                    <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-code">获取短信验证码</a>
+                </p>
+                <!--下载登录成功提示-->
+                <div class="down-tip"></div>
+                <button class="btn-ok"></button>
+                <div class="msg"></div>
+            </div>
+            <div class="service" style="font-size: .75rem; line-height: 2.25rem;">
+                <div class="service-box" style="padding-left: 0">
+                    <div style="position: relative;padding-left: 2.75rem">
+                        <img src="/m/images/img-user.png" style="top: -.25rem;">
+                        <p class="clear num-p"><span><b></b>，您好！</span><a href="javascript:;" class="btn-change">更换手机号</a></p>
+                    </div>
+                    <p class="confirm"></p>
+                    <div class="mobile-fee-text" style="display: none;"><span></span>享受VIP特权福利，需开通以下服务</div>
+                    <div class="mobile-crbt clear"></div>
+                    <div class="mobile-order clear"></div>
+                    <div class="pay-box clear">
+                        <div class="pay-member-tip">
+                            <em></em>
+                            <div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>加入VIP会员，畅享VIP特权</div>
+                        </div>
+                        <div class="pay-get-num">已有<em>1987654</em>位用户升级了VIP会员</div>
+                        <div class="pay-pro-list">
+                            <ul class="clear">
+                                <li class="pay-checked" data-protag="6">
+                                    <div class="pay-tag">最划算</div>
+                                    <div class="pay-name">VIP会员</div>
+                                    <div class="pay-price">50元/12个月</div>
+                                    <div class="pay-save">节省22元</div>
+                                </li>
+                                <li data-protag="5">
+                                    <div class="pay-name">VIP会员</div>
+                                    <div class="pay-price">28元/6个月</div>
+                                    <div class="pay-save">节省8元</div>
+                                </li>
+                                <li data-protag="4">
+                                    <div class="pay-name">VIP会员</div>
+                                    <div class="pay-price">15元/3个月</div>
+                                    <div class="pay-save">节省3元</div>
+                                </li>
+                                <li data-protag="3">
+                                    <div class="pay-name">VIP会员</div>
+                                    <div class="pay-price">6元/1个月</div>
+                                    <div class="pay-save"></div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="pay-btn clear">
+                            <button class="pay-QrCode fr">微信扫码支付</button>
+                            <button class="pay-WeChat fl">微信支付</button>
+                            <button class="pay-Alipay fl">支付宝</button>
+                        </div>
+                        <div class="pay-privilege">
+                            <div class="pay-member-tip">
+                                <em></em>
+                                <div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>VIP会员特权</div>
+                            </div>
+                            <ul class="privilege-list clear" style="margin-top: 0 "><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-ok"></button>
+                <div class="msg"></div>
+            </div>
+            <div class="explain">
+                <!--<div class="icon"></div>-->
+                <div class="explain-box">
+                    <img src="/m/images/img-user.png">
+                    <div class="msg"></div>
+                </div>
+                <button class="btn-ok"></button>
+            </div>
+        </div>
+        <div class="member-privilege"></div>
+    </div>
+</div>
+<script src="/javascripts/trace.js"></script>
+<script>
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    var _foot_wait = setInterval(function () {
+        if((diring_index_state && mobile_state && m2_m_state)) {
+            clearInterval(_foot_wait);
+            $(function(){
+                //不同域名跳转不同备案信息
+                var hrefValue = window.location.href;
+                if(hrefValue.indexOf("9fan.net") > 0){
+                    $('.beian-info').html('<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005077" target="_blank"><img src="/m/images/beian.png" class="beian-img"><em>浙公网安备 33010602005077号</em></a>');
+                    $('.www_css').hide();
+                }
+                else if(hrefValue.indexOf("www.9fan.cn") > 0){
+                    $('.beian-info').html('<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005078" target="_blank"><img src="/m/images/beian.png" class="beian-img"><em>浙公网安备 33010602005078号</em></a>');
+                }
+                else if(hrefValue.indexOf("s.9fan.cn") > 0){
+                    $('.beian-info').html('<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602005078" target="_blank"><img src="/m/images/beian.png" class="beian-img"><em>浙公网安备 33010602005078号</em></a>');
+                }
+                else if(hrefValue.indexOf("diy4.cn") > 0){
+                    $('.beian-info').html('<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602004183" target="_blank"><img src="/m/images/beian.png" class="beian-img"><em>浙公网安备 33010602004183号</em></a>');
+                    $('.www_css').hide();
+                }
+                else{
+                    $('.beian-info').html('<a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602001087"  target="_blank"><img src="/m/images/beian.png" class="beian-img"/><em>浙公网安备 33010602001087号</em></a>');
+                    $('.www_css').hide();
+                }
+                $('#content-view').height($(window).height());
+                var ua = navigator.userAgent;
+                if(ua.indexOf("RingBoxWebProj") > 0 || ua.indexOf("boxringAndroid") > 0){
+                    $('.footer').hide();
+                }
+                //提示信息隐藏
+                function get_cookie(Name){
+                    var search = Name + "=";
+                    var returnvalue = "";
+                    if (document.cookie.length > 0) {
+                        var offset = document.cookie.indexOf(search);
+                        if (offset != -1) {
+                            offset += search.length;
+                            var end = document.cookie.indexOf(";", offset);
+                            if (end == -1)
+                                end = document.cookie.length;
+                            returnvalue=unescape(document.cookie.substring(offset, end));
+                        }
+                    }
+                    return returnvalue;
+                }
+                if (!get_cookie("tipsed")){
+                    $('#float-tips').css('display','block').on('click','.close-tips',function(){
+                        $(this).parent().animate({'bottom':-$(this).parent().height()},300);
+                    });
+                    document.cookie="tipsed=yes";
+                }else{$('#float-tips').css('display','none');}
+                //泰迪渠道需要隐藏的内容
+                var code_exp_031 = /^(\d){7}031(\d)+$/;
+                if(code_exp_031.test(app.spinfocode)){
+                    $('.tips-text').hide();
+                    $('.tips-layer').hide();
+                    //$('.musics').find('.btn-download').hide();
+                    //$('.flow-box,.wling-box,.wechat-box').hide();
+                    //$('#float-tips').css('display','none');
+                }
+                var ua = navigator.userAgent;
+                if(ua.indexOf("RingBoxWebProj") > 0 || ua.indexOf("boxringAndroid") > 0){
+                    $('#float-tips').css('display','none');
+                }
+            })
+        }
+    }, 200);
+    /*var _winH = document.body.clientHeight || window.screen.height;
+     var _div = document.getElementById("slid-layer");
+     window.onresize = function(){
+     if (_div.style.display == 'block') {
+     _div.style.height = _winH+"px";
+     _div.style.top = 0;
+     }
+     }*/
+    var scrollView;
+    function loaded() {
+        scrollView = new iScroll('slid-layer',{
+            momentum: false,
+            hScrollbar: false,
+            vScrollbar: true,
+            useTransform: false,
+            onBeforeScrollStart: function (e) {
+                var target = e.target;
+                while (target.nodeType != 1) target = target.parentNode;
+                if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+                    e.preventDefault();
+            }
+        });
+    }
+    document.addEventListener('DOMContentLoaded', loaded, false);
+    window.onresize = function(){
+        var div = $('#slid-layer');
+        if (div.css("opacity")==1) {
+            var _w = $(window);
+            div.css({
+                'top': 0,
+                'bottom': 0,
+                'height': _w.height()
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

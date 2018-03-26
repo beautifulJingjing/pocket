@@ -1,0 +1,107 @@
+﻿<%- include include/index/head-index.ejs %>
+<style type="text/css">
+.sch-box{ background:#cac9ce; padding:.5em;}
+.sch-box input{ display:block; vertical-align:middle; height:2em; font-size:1.35em; border-radius:.3em; color:#999; overflow:hidden;}
+.sch-box input[type="text"]{float:left;width:65%; background:#fff url(images/icons_search.png) 8px center no-repeat;background-size:16px;-webkit-background-size:16px;-moz-background-size:16px;-o-background-size:16px;padding-left:1.75em;}
+.sch-box input[type="button"]{ float:right; width:23%; background:#ff4a00; font-size:1.4em; color:#fff; border:0;}
+.sch-oth{ width:92%; margin:0 auto;}
+.sch-oth p{ font-size:1.25em; line-height:2em;}
+.sch-keys p a{ display:inline-block; color:#4b5053; margin-right:1.2em; font-size:1em;}
+.sch-oth .schs{ margin-top:1em;}
+.sch-oth .schs a{ display:inline-block; line-height:2.5em; border:1px solid #e22020; border-radius:.25em; color:#e22020; font-size:1.25em; padding:0 2em; margin:0 .6em;}
+.sch-hot li{ height:2em; line-height:2em; overflow:hidden; font-size:1.25em;}
+.sch-hot li a{ color:#4b5053;}
+
+.ss-empty{display: none;width: 100%;padding: 1.25rem 0;text-align: center;color: #d8d8d8;}
+.ss-empty span{font-size: 4.5rem;width: 5rem;height: 4.5rem;line-height: 4.5rem;display: block;margin: 0 auto}
+.ss-empty p{font-size: .55rem}
+</style>
+<div class="main">
+  <div class="flmusic"></div>
+  <div class="loadmore" style="display:none"><div class="loadmore-inner"><i class="icon-font iconfont-load"></i><span>点击加载更多</span></div></div>
+  <section class="ss-empty">
+    <span class="icon-font iconfont-empty"></span>
+    <p>脑洞太大，搜不到啊！</p>
+  </section>
+</div>
+<div id="ring-template" style="display: none;">
+  <div class="musics clear">
+      <div class="left-area">
+          <em>{0}</em>
+          <a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="controlbtn btn-play">暂停/播放</a>
+      </div>
+      <div class="pinfo">
+          <div class="fr set">
+              <a href="javascript:void(0);" data-rid="{3}" data-flag="{4}" data-sprid="{5}" class="icon-font icon-color iconfont-ringSet btn-setring"></a>
+              <a href="javascript:void(0);" data-rid="{3}" data-rname="{1}" data-sprid="{5}" class="icon-font icon-color iconfont-ringDown btn-download"></a>
+          </div>
+          <div>
+              <a href="javascript:void(0);" class="btn-play">
+                  <p class="name">{1}</p>
+                  <p class="lh"><i class="icon-font iconfont-vip vip"></i><span>{2}</span></p>
+              </a>
+          </div>
+      </div>
+  </div>
+</div>
+<script>
+    var _search_wait = setInterval(function () {
+        if(diring_index_state) {
+            clearInterval(_search_wait);
+
+          var ope = $('.flmusic'), more = $('.loadmore');
+          var sch_key = null;
+          if (sch_key = $.request('key')) {
+            $('.sch-box').find('input[type="text"]').val(sch_key);
+            load_search();
+          }
+          function load_search() {
+            var data = {
+              cmd: 'search',
+              key: sch_key,
+              type: 3,
+              start: ope.children().length,
+              records: 20
+            };
+            $.ajax({
+              url: "/proxy/v3/proxy.ahtml",
+              data: data,
+              dataType: 'json',
+              cache: true,
+              type: 'get',
+              beforeSend: function () { mbox.waiting('加载中，请稍候……'); },
+              success: function (r) {
+                if (r.s == 1) {
+                    if(r.data.count == 0) $('.ss-empty').show();
+                    else{
+                        $('.ss-empty').hide();
+                        if (r.data.list.length > 0) {
+                            var template = $('#ring-template').html();
+                            for (var i in r.data.list) {
+                                var d = r.data.list[i];
+                                var li = $(template.format(parseInt(i) + data.start + 1, d.name, d.songer, d.ringid, d.coprinfo.cflag,d.springid)).data('coprinfo', d.coprinfo);
+                                if (d.isnew == '1') li.find('.vip').before('<i class="new">新</i>');
+                                if (d.ishot == '1') li.find('.vip').before('<i class="hot">热</i>');
+                                if (app.spinfocode == '00000350311' || app.spinfocode == '00000350312') {
+                                    li.find('.btn-download').hide()
+                                }
+                                li.find('.btn-play').click(app.doPlay);
+                                li.find('.btn-download').click(app.doDownload);
+                                if (app.pushinfo.ringset.serve == 3 && d.coprinfo.type == '99') li.find('.btn-setring').addClass('gray');
+                                else li.find('.btn-setring').click(app.doSetRing);
+                                ope.append(li);
+                            }
+                            if (data.records > r.data.list.length) more.hide();
+                            else more.show();
+                        }
+                    }
+                }
+              },
+              complete: function () { mbox.close(); }
+            });
+          }
+          more.click(load_search);
+        }
+      }, 50);
+</script>
+<%- include include/foot.ejs %>

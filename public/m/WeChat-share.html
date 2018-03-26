@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title>title</title>
+    <link rel="stylesheet" href="/m/stylesheets/basic.css">
+    <style type="text/css">
+        #slid-layer{display: block;left: 0}
+        #slid-layer .musics a.btn-play {background: url(/m/images/btn-play-red-1.png) left center no-repeat;background-size: 1.5rem auto;-webkit-background-size: 1.5rem auto;-moz-background-size: 1.5rem auto;-o-background-size: 1.5rem auto;}
+        #slid-layer .musics a.btn-pause {background: url(/m/images/btn-pause-red-1.gif) left center no-repeat;background-size: 1.5rem auto;-webkit-background-size: 1.5rem auto;-moz-background-size: 1.5rem auto;-o-background-size: 1.5rem auto;}
+    </style>
+</head>
+<body>
+<script>
+    //控制页面自适应
+    var _winW = document.body.clientWidth || window.screen.width;
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+</script>
+<div id="slid-layer" class="slid-layer">
+    <div class="t">
+        <span>页面标题</span>
+    </div>
+    <div class="musics clear">
+        <div class="left-area">
+            <a href="javascript:void(0);" data-rid="2923665" data-sprid="465319747d000770bf3feb2aa69ac041" class="controlbtn btn-pause">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <a href="javascript:void(0);" data-rid="2923665" data-flag="2001" data-sprid="465319747d000770bf3feb2aa69ac041" class="icon-font icon-color iconfont-ringSet btn-setring"></a>
+                <a href="javascript:void(0);" data-rid="2923665" data-rname="游爱民族" data-sprid="465319747d000770bf3feb2aa69ac041" class="icon-font icon-color iconfont-ringDown btn-download"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">游爱民族</p>
+                    <p class="lh"><i class="new">新</i><i class="icon-font iconfont-vip vip"></i><span>吉克隽逸</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="member-tip">
+        <em></em>
+        <div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>加入VIP会员，畅享彩铃无限量更换<i>(0元/首)</i></div>
+    </div>
+    <div class="c">
+        <div class="checking">
+            <p class="clear" id="phone-verifi">
+                <!--<i class="icon-font iconfont-phone"></i>-->
+                <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+            </p>
+            <p class="clear" id="code-verifi">
+                <!--<i class="icon-font iconfont-sms"></i>-->
+                <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-code">获取短信验证码</a>
+            </p>
+            <!--下载登录成功提示-->
+            <div class="down-tip"></div>
+            <button class="btn-ok"></button>
+            <div class="msg"></div>
+        </div>
+        <div class="service" style="font-size: .75rem; line-height: 2.25rem;">
+            <div class="service-box" style="padding-left: 0">
+                <div style="position: relative;padding-left: 2.75rem">
+                    <img src="/m/images/img-user.png" style="top: -.25rem;">
+                    <p class="clear num-p"><span><b>13526581365</b>，您好！</span><a href="javascript:;" class="btn-change">更换手机号</a></p>
+                </div>
+                <p class="confirm"></p>
+                <div class="mobile-fee-text" style="display: none;"><span></span>享受VIP特权福利，需开通以下服务</div>
+                <div class="mobile-crbt clear"></div>
+                <div class="mobile-order clear"></div>
+            </div>
+            <button class="btn-ok"></button>
+            <div class="msg">温馨提示：<br>• 加入VIP会员（<u>6元/月</u>），即可享受VIP特权福利。200万首VIP“<span class="icon-font icon-color iconfont-queen"></span>”标记彩铃（0元/首）。<br>• 非彩铃用户，设置彩铃需开通彩铃功能，参考资费（<u>5元/月</u>），联通4G用户（0元/月），以本地运营商资费为准。（彩铃用户请忽略此项）<br>• VIP会员用户，该操作仅为登录，不会重复升级。</div>
+        </div>
+        <div class="explain">
+            <div class="explain-box">
+                <img src="/m/images/img-user.png">
+                <div class="msg"></div>
+            </div>
+            <button class="btn-ok"></button>
+        </div>
+    </div>
+    <div class="member-privilege"></div>
+</div>
+</body>
+</html>

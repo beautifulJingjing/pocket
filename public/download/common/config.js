@@ -1,0 +1,13 @@
+﻿var config = {
+	ios		: {
+		versions	: "(v2.1.18.20 | 20140415 | 9.36MB)", // ios版版本号
+		download	: "http://down.ringbox.cn/yiling/ios/2.1.18.20/yiling_v2.1.18.20_10001061.deb", // deb下载地址
+		updateInfo	: "20140415(V2.1.18.20)<br/>&nbsp;&nbsp;修正ios兼容问题<br/>20140123(V2.1.18.51)<br/>&nbsp;&nbsp;增加猜铃和送祝福活动<br/>20131128(V2.1.18.44)<br/>&nbsp;&nbsp;修复彩铃diy超过上限  替换列表存在非diy铃音问题<br/>20131108(V2.1.18.43)<br/>&nbsp;&nbsp;订购流程优化<br/>20131029(V2.1.18.35)<br/>&nbsp;&nbsp;修复bug<br/>20131018(V2.1.18.2)<br/>&nbsp;&nbsp;修复ios系统升级到7后产生的部分bug<br/>20131011(V2.1.18.1)<br/>&nbsp;&nbsp;新版UI界面，体验优化<br/>20130416(V2.1.16.9)<br/>&nbsp;&nbsp;1.增加个性DIY铃音入口;&nbsp;&nbsp;2.增加活动专区;&nbsp;&nbsp;3.DIY录制功能优化;&nbsp;&nbsp;4.修复bug<br/>20130322(V2.1.15.17)<br/>&nbsp;&nbsp;修复bug<br/>20130307(V2.1.15.15)<br/>&nbsp;&nbsp;1.升级会员流程优化（会员用户当月免费）;&nbsp;&nbsp;2.产品性能优化;&nbsp;&nbsp;3.UI优化;&nbsp;&nbsp;4.修复bug<br/>20130201(V2.1.14.4)<br/>&nbsp;&nbsp;1.铃声DIY功能优化;&nbsp;&nbsp;2.新增主题DIY铃声栏目;&nbsp;&nbsp;3.修复BUG<br/>20130108(V2.1.13.5)<br/>&nbsp;&nbsp;1.UI优化;&nbsp;&nbsp;2.增加消息提醒;&nbsp;&nbsp;3.增加微信通知;&nbsp;&nbsp;4.产品性能优化<br/>20121221(V2.1.12.9)<br/>&nbsp;&nbsp;1.UI优化;&nbsp;&nbsp;2.在线内容结构优化;&nbsp;&nbsp;3.增加推荐功能;&nbsp;&nbsp;4.增加通知功能;&nbsp;&nbsp;5.产品性能优化<br/>20121205(v2.1.11.7)<br/>&nbsp;&nbsp;全新上线", // ios版更新说明
+		cydia	    : "cydia://search/翼铃" // cydia搜索关键词
+	},
+	android	: {
+		versions	: "(v2.1.18.51 | 20140123 | 8.27MB)", // android版版本号
+		download	: "http://down.ringbox.cn/yiling/android/2.1.18.51/yiling_2.1.18.51_40001061.apk", // apk下载地址
+		updateInfo	: "20140123(V2.1.18.51)<br/>&nbsp;&nbsp;增加猜铃和送祝福活动<br/>20131128(V2.1.18.44)<br/>&nbsp;&nbsp;修复彩铃diy超过上限  替换列表存在非diy铃音问题<br/>20131108(V2.1.18.43)<br/>&nbsp;&nbsp;订购流程优化<br/>20131029(V2.1.18.35)<br/>&nbsp;&nbsp;修复bug<br/>20130913(V2.1.18.33)<br/>&nbsp;&nbsp;新版UI界面，体验优化<br/>20130814(V2.1.17.39)<br/>&nbsp;&nbsp;修复部分机型首次打开黑屏问题<br/>20130523(V2.1.17.7)<br/>&nbsp;&nbsp;1.UI优化;&nbsp;&nbsp;2.升级会员流程调整;&nbsp;&nbsp;3.修复bug;&nbsp;&nbsp;4.炫铃支持省份增加陕西<br/>20130513(V2.1.17.1)<br/>&nbsp;&nbsp;修复bug<br/>20130510(V2.1.17.0)<br/>&nbsp;&nbsp;修复部分机型开启2D加速后播放铃声崩溃的问题<br/>20130422(V2.1.16.8)<br/>&nbsp;&nbsp;1.增加个性DIY铃音入口;&nbsp;&nbsp;2.增加活动专区;&nbsp;&nbsp;3.DIY录制功能优化;&nbsp;&nbsp;4.修复bug<br/>20130322(V2.1.15.10)<br/>&nbsp;&nbsp;修复bug<br/>20130307(V2.1.15.7)<br/>&nbsp;&nbsp;1.升级会员流程优化（会员用户当月免费）;&nbsp;&nbsp;2.产品性能优化;&nbsp;&nbsp;3.UI优化;&nbsp;&nbsp;4.修复bug<br/>20130129(V2.1.14.1)<br/>&nbsp;&nbsp;1.铃声DIY功能优化;&nbsp;&nbsp;2.新增主题DIY铃声栏目;&nbsp;&nbsp;3.修复BUG<br/>20130108(V2.1.13.1)<br/>&nbsp;&nbsp;1.UI优化;&nbsp;&nbsp;2.增加消息提醒;&nbsp;&nbsp;3.增加微信通知;&nbsp;&nbsp;4.产品性能优化<br/>20121221(V2.1.12.9)<br/>&nbsp;&nbsp;1.UI优化;&nbsp;&nbsp;2.在线内容结构优化;&nbsp;&nbsp;3.增加推荐功能;&nbsp;&nbsp;4.增加通知功能;&nbsp;&nbsp;5.产品性能优化<br/>20121205(v2.1.11.3)<br/>&nbsp;&nbsp;全新上线" // android版更新说明
+	}
+}

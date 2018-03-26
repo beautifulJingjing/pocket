@@ -1,0 +1,41 @@
+.header{height: 40px;background:#fff;position: relative;border-bottom: 1px solid #d9d9d9}
+.title{position: relative;height: 40px;line-height: 40px;width: 80%;margin: 0 auto;color: #333;font-size: 16px;text-align: center}
+.btn-back{position: absolute;left: 10px;top:0;height: 40px;width: 55px;}
+.btn-back a{display: block;height: 40px;line-height: 40px;background: url(/m/images/icon-back-red.png) left center no-repeat;background-size: 15px 22px;-webkit-background-size: 15px 22px;color: #f02127;font-size: 16px;padding-left: 15px;text-align: center}
+
+.box-layer{background: #fff;border-radius: 10px;padding: 15px 15px 10px;width: 80%;margin: 20px auto;}
+.box-tit{font-size: 16px;font-weight: 700;color: #f12c64;background: url(/m/images/zt/icon-heart.png) left center no-repeat;background-size: 18px auto;-webkit-background-size: 20px auto;padding-left: 25px}
+.prize-tit span{position: absolute;height: 1px;background: #2a7fd4;left: 0;top: 50%;margin-top: -1px;display: block;width: 100%;z-index: 0;}
+.prize-con{padding: 10px 10px 20px;}
+.prize-con li{ padding:.5em 0; position:relative;}
+.prize-con li img{ width:3.75em; position:absolute; top:.5em; left:0;}
+.prize-con li div{ height:3.65em; margin-left:4.8em; border-bottom:1px dashed #a6baba;}
+.prize-con li div p{ font-size:1.2em; line-height:1.5em; color:#ff7f4f; font-weight:700;}
+.rule-con{padding: 0 5px 15px;margin-top: 15px;}
+.rule-con li{position: relative;line-height: 20px;margin-top: 8px;padding-left: 20px;font-size: 13px;color: #333;}
+.rule-con li span{position: absolute;top: 0;left: 0;display: inline-block;height: 16px;line-height: 16px;background: #3a91f2;color: #fff;font-size: 12px;width:16px;border-radius: 50%;text-align: center;}
+.rule-tit span{position: absolute;height: 1px;background: #ff4700;left: 0;top: 50%;margin-top: -1px;display: block;width: 100%;z-index: 0;}
+.rule-con li{position: relative;line-height: 20px;margin-top: 8px;padding-left: 20px;font-size: 13px;color: #333;}
+.rule-con li span{position: absolute;top: 0;left: 0;display: inline-block;height: 16px;line-height: 16px;background: #ff4700;color: #fff;font-size: 12px;width:16px;border-radius: 50%;text-align: center;}
+.wined-list{margin-top: 30px;}
+.wined-list ul{padding: 0 15px;margin-top: 10px;}
+.wined-list li{line-height: 24px;font-size: 13px;color: #333;}
+.wined-list li span{ padding:0 .4em;}
+.wined-list li em{ color:#FF7F00;}
+
+.showmore{ margin-top:.65em;}
+.showmore a{ display:block; height:2em; line-height:2em; font-size:1.3em; color:#ff4700; background:#fff4aa; text-align:center;}
+
+.no-con{padding: 45px 10px;text-align: center}
+.no-con img{width: 60px;height: 60px;margin: 0 auto}
+.no-con p{color: #9497ac;line-height: 50px;}
+
+/*弹窗*/
+#user-tc{width:90%; background:#fff; border-radius:.5em; padding-bottom:10px; font-size:16px; z-index:999; display:none;}
+.tc-tit{height: 45px;line-height: 45px;background: #ff3e3f;color: #fff;border-radius: .5em .5em 0 0;font-size: 15px;text-align: center;position: relative;}
+.tc-tit em{position: absolute;width: 20px;height: 20px;background: url(/m/images/zt/closeico.png) no-repeat;background-size: 20px;-webkit-background-size: 20px;top: 10px;right: 10px;}
+.cjbox{text-align:left; margin:0 auto; color:#474545;padding: 15px;}
+.showcon{text-align:left; line-height:25px; color:#333;}
+.showcon span{ padding:0 5px; color:#ff3e3f; font-weight:600;}
+.showcon a{ color:#0093d0; text-decoration:underline;}
+.btns{height:36px; display:block; background:#ff3e3f; border-radius:5px; font:16px/40px "Microsoft yahei"; color:#fff; border:0; padding:0 25px; margin:20px auto 0; cursor:pointer;line-height: 36px;}

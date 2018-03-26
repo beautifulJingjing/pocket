@@ -1,0 +1,141 @@
+<%- include include/index/head-index.ejs %>
+<style type="text/css">
+    .curnum{color:#333;height:1.5rem;line-height: 1.5rem;border-bottom: .05rem solid #ddd}
+    .help{padding: 0 .5rem 1rem .5rem;line-height: 1rem;}
+    .help dl{margin: 1rem 0 .25rem 0;color: #666;}
+    .help dt{font-size: .65rem;margin-bottom: .25rem;color:#000;border-left: .2rem solid #ff5159;padding-left: .5rem;line-height: .9rem;}
+    .help dd{padding-left: .5rem;font-size: .55rem;}
+    .privilege-list{margin-top: 0}
+    .privilege-list li{padding-top: .25rem;}
+    .help-info dd span{color: #ed1c24}
+    .help div{text-align: center;margin-top: .75rem;}
+    .help div button{height: 2rem;border: .05rem solid #ed1c24;color: #ed1c24;font-size: .65rem;width:90%;background: none;margin: 0 auto;box-sizing: border-box;-webkit-box-sizing: border-box;border-radius: .25rem;}
+</style>
+<section>
+    <div class="help">
+        <dl>
+            <dt>1.  VIP会员有哪些专享特权？</dt>
+            <dd>
+                <ul class="privilege-list clear">
+                    <li>
+                        <span class="icon-01"></span>
+                        <h4>尊贵VIP标识</h4>
+                        <p>酷炫图标，彰显土豪身份</p>
+                    </li>
+                    <li>
+                        <span class="icon-02"></span>
+                        <h4>高清铃声免费试听</h4>
+                        <p>2,000,000首任你听</p>
+                    </li>
+                    <li>
+                        <span class="icon-03"></span>
+                        <h4>高清彩铃免费更换</h4>
+                        <p>2,000,000首无限更换</p>
+                    </li>
+                    <li>
+                        <span class="icon-04"></span>
+                        <h4>高清振铃免费下载</h4>
+                        <p>2,000,000首无限下载</p>
+                    </li>
+                    <li>
+                        <span class="icon-05"></span>
+                        <h4>VIP免费抽奖特权</h4>
+                        <p>话费/流量等奖品免费拿</p>
+                    </li>
+                    <li>
+                        <span class="icon-06"></span>
+                        <h4>VIP免广告特权</h4>
+                        <p>让你安静享受音乐</p>
+                    </li>
+                </ul>
+            </dd>
+
+        </dl>
+        <dl class="cost">
+            <dt>2.  VIP会员怎么收费？</dt>
+            <dd>• 原价6元/月，活动价：50元/12个月、28元/6个月、15元/3个月</dd>
+        </dl>
+        <dl>
+            <dt>3.  彩铃如何设置？</dt>
+            <dd>• 开通VIP会员后，点击彩铃按钮，即可设置彩铃。</dd>
+            <dd>• 彩铃设置，需先开通彩铃功能，如果您没有开通，我们会帮您开通，彩铃功能费各地区有所不同，您也可拨打当地运营商客服电话咨询开通。</dd>
+        </dl>
+        <dl>
+            <dt>4. 如果关闭了彩铃功能，会不会导致VIP会员服务不能正常使用？</dt>
+            <dd>• 是的，没有彩铃功能，是不能设置彩铃的哦。但下载手机铃声还是可以正常使用的。</dd>
+        </dl>
+        <dl>
+            <dt>5. 如何退订会员服务？</dt>
+        </dl>
+        <div><button class="btn-out">退订</button></div>
+    </div>
+</section>
+<script type="text/javascript">
+    var _help_wait = setInterval(function () {
+        if((diring_index_state && mobile_state && m2_m_state && init_state)) {
+            clearInterval(_help_wait);
+
+            var out=$('.btn-out');
+            app.user.change.push(function() {
+                out.off('click').on('click',function(){
+                    if(app.user.phone&&_mobilecom.regexPhone.test(app.user.phone)){
+                        if(app.user.token){
+                            if(app.user.orderstate == 2){
+                                if (confirm('亲~ 是否确认退订VIP会员服务？')) app.alertOutOrder({
+                                    member_tip: '<div style="height:15px;"> </div>',
+                                    member_tq: '<div class="tq-inner"><div class="text-tit"><i></i><em>VIP会员特权</em></div><ul class="privilege-list clear"><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul></div>'
+                                });
+                            }
+                            else{
+                                mbox.explain({
+                                    title: '温馨提示',
+                                    member_tq: '<div class="tq-inner"><div class="text-tit"><i></i><em>VIP会员特权</em></div><ul class="privilege-list clear"><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul></div>',
+                                    explain: '您还不是VIP会员，无需退订哦~'
+                                });
+                            }
+                        }
+                        else{
+                            mbox.explain({
+                                title: '温馨提示',
+                                member_tip: '<div style="height:15px;"> </div>',
+                                explain: '您还未登录，不能退订哦~'
+                            });
+                        }
+                    }
+                    else{
+                        if(app.user.logined()) {
+                            if(app.user.isorder()) {
+                                if (app.user.orderendtime == -1) {
+                                    if (confirm('亲~ 是否确认退订VIP会员服务？')) app.alertOutOrder({
+                                        member_tip: '<div style="height:15px;"> </div>',
+                                        member_tq: '<div class="tq-inner"><div class="text-tit"><i></i><em>VIP会员特权</em></div><ul class="privilege-list clear"><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul></div>'
+                                    });
+                                }
+                                else
+                                    alert('亲，您的服务截止' + new Date(new Date(1970, 1, 1).getUTCMilliseconds() + parseFloat(app.user.orderendtime)).toLocaleDateString() + '，不需要重复退订!');
+                            }
+                            else{
+                                mbox.explain({
+                                    title: '温馨提示',
+                                    member_tq: '<div class="tq-inner"><div class="text-tit"><i></i><em>VIP会员特权</em></div><ul class="privilege-list clear"><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul></div>',
+                                    explain: '您还不是VIP会员，无需退订哦~'
+                                });
+                            }
+                        }
+                        else{
+                            mbox.explain({
+                                title: '温馨提示',
+                                member_tip: '<div style="height:15px;"> </div>',
+                                explain: '您还未登录，不能退订哦~'
+                            });
+                        }
+                    }
+                });
+            });
+            app.user.change.forEach(function (func) {
+                func.call();
+            });
+        }
+    }, 50);
+ </script>
+<%- include include/foot.ejs %>

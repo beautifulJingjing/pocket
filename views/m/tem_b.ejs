@@ -1,0 +1,510 @@
+<%- include include/index/head-index.ejs %>
+<link rel="stylesheet" href="/m/stylesheets/tem.css">
+<script src="/javascripts/TouchSlide.js"></script>
+<div class="nav-wrap">
+    <ul>
+        <li class="tit">最新</li>
+        <li class="tit">榜单</li>
+        <li class="tit">专题</li>
+        <li class="tit">分类</li>
+        <li class="tit">搜索</li>
+        <li style="left: 0px;" class="acurs"><span></span></li>
+    </ul>
+</div>
+<div class="main" id="content-main">
+    <div class="laste dv" title="最新" data-part="-11">
+        <section class="laste-ban">
+            <div id="focus" class="focus">
+                <div class="hd">
+                    <ul></ul>
+                </div>
+                <div class="bd">
+                    <ul></ul>
+                </div>
+            </div>
+        </section>
+        <section class="ring-list"></section>
+    </div>
+    <div class="tops dv" title="榜单" style="display: none">
+    </div>
+    <div class="zt dv" title="专题" style="display:none;"></div>
+    <div class="more dv" title="分类" data-type="5" style="display:none;">
+        <h3>热门标签</h3>
+        <div class="clear">
+            <ul class="clear" id="label-list"></ul>
+        </div>
+        <h3>热门歌手</h3>
+        <div class="clear">
+            <ul class="clear" id="songer-list">
+            </ul>
+        </div>
+    </div>
+    <div class="search dv" title="搜索" style="display: none">
+        <section class="ss-box">
+            <div class="ss-input"><span class="icon-font iconfont-search"></span><input type="text" placeholder="搜索歌曲、歌手"><em class="icon-font iconfont-clear"></em></div>
+            <button>搜索</button>
+        </section>
+        <section class="ss-list" style="display: none">
+        </section>
+        <section class="ss-empty">
+            <span class="icon-font iconfont-empty"></span>
+            <p>脑洞太大，搜不到啊！</p>
+        </section>
+        <section class="ss-hot">
+            <h3>热门搜索</h3>
+            <ul class="clear"></ul>
+        </section>
+    </div>
+</div>
+<section class="explanation-layout">
+    <div class="tips-text">小贴士：如果您的手机不支持下载，请通过电脑浏览器（Chrome）下载后同步到手机即可。</div>
+    <div class="sm-text">
+        <div class="text-tit"><i></i><em>VIP会员特权</em></div>
+        <ul class="privilege-list clear">
+            <li>
+                <span class="icon-01"></span>
+                <h4>尊贵VIP标识</h4>
+                <p>酷炫图标，彰显土豪身份</p>
+            </li>
+            <li>
+                <span class="icon-02"></span>
+                <h4>高清铃声免费试听</h4>
+                <p>2,000,000首任你听</p>
+            </li>
+            <li>
+                <span class="icon-03"></span>
+                <h4>高清彩铃免费更换</h4>
+                <p>2,000,000首无限更换</p>
+            </li>
+            <li>
+                <span class="icon-04"></span>
+                <h4>高清振铃免费下载</h4>
+                <p>2,000,000首无限下载</p>
+            </li>
+            <li>
+                <span class="icon-05"></span>
+                <h4>VIP免费抽奖特权</h4>
+                <p>话费/流量等奖品免费拿</p>
+            </li>
+            <li>
+                <span class="icon-06"></span>
+                <h4>VIP免广告特权</h4>
+                <p>让你安静享受音乐</p>
+            </li>
+        </ul>
+    </div>
+    <div class="sm-text">
+        <div class="text-tit"><i></i><em>温馨提示</em></div>
+        <p class="p1">欢迎加入口袋铃声VIP会员，联通用户原价6元/月，活动价：50元/12个月、28元/6个月、15元/3个月，后续还有更多VIP会员专享福利。</p>
+    </div>
+</section>
+<div id="more-template" style="display: none;">
+    <div class="loadmore"><div class="loadmore-inner"><i class="icon-font iconfont-load"></i><span>点击加载更多</span></div></div>
+</div>
+<div id="tops-template" style="display: none">
+    <div class="bdlist">
+        <h3>{1}</h3>
+        <a href="partlist,id={2}.html">
+            <img src="{0}">
+            <div class="rlist"></div>
+        </a>
+    </div>
+</div>
+<div id="part-template" style="display:none">
+    <ul>
+        <li><a href="partlist,id={2}.html"><img src="{0}" alt="{1}"></a>
+            <p><a href="partlist,id={2}.html">{1}</a></p>
+        </li>
+    </ul>
+</div>
+<div id="ring-template" style="display: none;">
+    <div class="musics clear">
+        <div class="left-area">
+            <em>{0}</em>
+            <a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="controlbtn btn-play">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <a href="javascript:void(0);" data-rid="{3}" data-flag="{4}" data-sprid="{5}" class="icon-font icon-color iconfont-ringSet btn-setring"></a>
+                <a href="javascript:void(0);" data-rid="{3}" data-rname="{1}" data-sprid="{5}" class="icon-font icon-color iconfont-ringDown btn-download"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font iconfont-vip vip"></i><span>{2}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="act-template" style="display: none;">
+    <ul>
+        <li><a href="{2}"><img src="{0}" alt="{1}"></a>
+            <p><a href="{2}">{1}</a></p>
+        </li>
+    </ul>
+</div>
+<script>
+    var _tem_wait = setInterval(function () {
+        if(diring_index_state) {
+            clearInterval(_tem_wait);
+            var ua = navigator.userAgent;
+            if (ua.indexOf("RingBoxWebProj") > 0 || ua.indexOf("boxringAndroid") > 0) {
+                $('.head').hide();
+                $('.nav-wrap').css('top', 0);
+                $('#view').css('padding-top', 0);
+            }
+            var boxs = $('.main').find('.dv'), menu = $('.nav-wrap').find('li');
+            /*主体tab切换*/
+            menu.click(function () {
+                if ($(window).scrollTop() >= 0) {
+                    $(window).scrollTop(0);
+                }
+                var index = menu.index(this);
+                if (index == menu.length - 1) return;
+                var l = index * ($(window).width() / 5);
+                $('.acurs').animate({left: l + "px"});
+                var dv = boxs.eq(index);
+                dv.show().siblings().hide();
+                $(this).addClass('cur').siblings().removeClass('cur');
+                if (index == 0) dv = dv.find('.ring-list');
+                if (index == 3) dv = dv.find('#label-list');
+                if (index == 4) dv = dv.find('.ss-hot ul');
+                if (dv.children().length == 0) load_content(index);
+            });
+            function load_content(idx) {
+                var data, dv = boxs.eq(idx), more = dv.find('.loadmore');
+                if (idx == 0) {
+                    data = {
+                        cmd: 'get-ringlist',
+                        spinfocode: app.spinfocode,
+                        pid: dv.data('part'),
+                        start: dv.find('.musics').length,
+                        records: 20
+                    };
+                }
+                else if (idx == 1) {
+                    data = {
+                        cmd: 'get-parts',
+                        spinfocode: app.spinfocode,
+                        start: 0,
+                        type: 2
+                    };
+                }
+                else if (idx == 2) {
+                    data = {
+                        cmd: 'get-parts',
+                        spinfocode: app.spinfocode,
+                        type: 1,
+                        w: 640
+                    };
+                }
+                else if (idx == 3) {
+                    data = {
+                        cmd: 'get-parts',
+                        spinfocode: app.spinfocode,
+                        type: dv.data('type')
+                    };
+                }
+                else if (idx == 4) {
+                    data = {
+                        cmd: 'get-searchhot',
+                        position: 2,
+                        spinfocode: app.spinfocode,
+                        start: dv.find('li').length,
+                        records: 20
+                    };
+                }
+                if (data) {
+                    $.ajax({
+                        url: "/proxy/v3/proxy.ahtml",
+                        data: data,
+                        dataType: 'json',
+                        cache: true,
+                        type: 'get',
+                        beforeSend: function () {
+                            mbox.waiting('加载中，请稍候……');
+                        },
+                        success: function (r) {
+                            if (r.s == 1) {
+                                if (idx == 0) {  //最新
+                                    dv = dv.find('.ring-list');
+                                    var template = $('#ring-template').html();
+                                    if (more.length == 0) {
+                                        dv.append($('#more-template').html());
+                                        more = dv.find('.loadmore').hide();
+                                        more.click(function () {
+                                            load_content(idx);
+                                        });
+                                    }
+                                    for (var i in r.data.list) {
+                                        var d = r.data.list[i];
+                                        var li = $(template.format(parseInt(i) + data.start + 1, d.name, d.songer, d.ringid, d.coprinfo.cflag, d.springid)).data('coprinfo', d.coprinfo);
+                                        if (d.isnew == '1') li.find('.vip').before('<i class="new">新</i>');
+                                        if (d.ishot == '1') li.find('.vip').before('<i class="hot">热</i>');
+                                        if(/^(\d){7}031(\d)+$/.test(app.spinfocode)) {li.find('.btn-download').hide();}
+                                        li.find('.btn-play').click(app.doPlay);
+                                        li.find('.btn-download').click(app.doDownload);
+                                        if (app.pushinfo.ringset.serve == 3 && d.coprinfo.type == '99') li.find('.btn-setring').addClass('gray');
+                                        else li.find('.btn-setring').click(app.doSetRing);
+                                        more.before(li);
+                                    }
+                                    if (data.records > r.data.list.length) more.hide();
+                                    else more.show();
+                                }
+                                else if (idx == 1) {  //榜单
+                                    var template = $('#tops-template').html();
+                                    for (var i in r.data.list) {
+                                        d = r.data.list[i];
+                                        var li = $(template.format(d.picpath, d.name, d.pid, d.rlistdata)).data('id', d.pid);
+                                        dv.append(li);
+                                        for (var k in d.rlistdata) {
+                                            li.find('.rlist').append('<span>' + parseInt(parseInt(k) + 1) + '. ' + d.rlistdata[k].name + '</span>');
+                                        }
+                                    }
+                                }
+                                else if (idx == 2) {   //专题
+                                    var template = $('#part-template').html();
+                                    for (var i in r.data.list) {
+                                        var d = r.data.list[i];
+                                        dv.append(template.format(d.picpath, d.name, d.pid));
+                                    }
+                                }
+                                else if (idx == 3) {  //分类
+                                    dv = dv.find('#label-list');
+                                    //if (data.type == 3)//普通分类有榜单
+                                    //dv.append('<li><a href="' + app.link('tops.html') + '">榜单</a></li>');
+                                    var template = '<li><a href="' + app.link('partlist,id={1}.html') + '"><img src="{2}"><span>{0}</span> </a></li>';
+                                    for (var i in r.data.list) {
+                                        var d = r.data.list[i];
+                                        dv.append(template.format(d.name, d.pid, d.picpath));
+                                    }
+                                    var _count = r.data.count;
+                                    if (_count % 3 == 0) {
+                                        $('.more li:last-child').css('border-bottom', 0);
+                                        $('.more li:nth-last-child(2)').css('border-bottom', 0);
+                                        $('.more li:nth-last-child(3)').css('border-bottom', 0);
+                                    }
+                                    if (_count % 3 == 1) {
+                                        $('.more li:last-child').css('border-bottom', 0);
+                                    }
+                                    if (_count % 3 == 2) {
+                                        $('.more li:last-child').css('border-bottom', 0);
+                                        $('.more li:nth-last-child(2)').css('border-bottom', 0);
+                                    }
+                                }
+                                else if (idx == 4) {   //搜索
+                                    dv = dv.find('.ss-hot ul');
+                                    //var template = '<li><a href="' + app.link('search,key={0}.html') + '"><span>{0}</span> </a></li>';
+                                    var template = '<li><a href="javascript:;"><span>{0}</span> </a></li>';
+                                    /*if (more.length == 0) {
+                                     dv.after($('#more-template').html());
+                                     more = dv.parent().find('.loadmore').hide();
+                                     more.click(function () { load_content(idx); });
+                                     }*/
+                                    for (var i in r.data.list) {
+                                        var d = r.data.list[i];
+                                        dv.append(template.format(d.name));
+                                    }
+                                    $('.ss-hot').on('click', 'a', function () {
+                                        var _val = $(this).text();
+                                        $('.ss-input').find('input').val(_val);
+                                        $('.ss-input').find('em').show();
+                                        load_search();
+                                        sch.hide();
+                                    });
+                                    //if (data.records > r.data.list.length) more.hide();
+                                    //else more.show();
+                                }
+                            }
+                        },
+                        complete: function () {
+                            mbox.close();
+                        }
+                    });
+                }
+            }
+            /*搜索*/
+            var sch_list = $('.ss-list'), sch = $('.ss-hot'), sch_key = null;
+            $('.ss-input').find('input').focus(function () {
+                $(this).parent().find('em').show();
+            });
+            $('.ss-box').find('button').click(function () {
+                sch_list.html('');
+                load_search();
+                sch.hide();
+            });
+            function load_search() {
+                sch_list.show();
+                var more = sch_list.find('.loadmore');
+                var data = {
+                    cmd: 'search',
+                    key: $('.ss-input').find('input[type="text"]').val(),
+                    type: 3,
+                    start: sch_list.find('.musics').length,
+                    records: 10
+                };
+                $.ajax({
+                    url: "/proxy/v3/proxy.ahtml",
+                    data: data,
+                    dataType: 'json',
+                    cache: true,
+                    type: 'get',
+                    beforeSend: function () {
+                        mbox.waiting('加载中，请稍候……');
+                    },
+                    success: function (r) {
+                        if (r.s == 1) {
+                            $('.list-num').remove();
+                            //sch_list.prepend('<div class="list-num">' + r.data.count + '个搜索结果</div>');
+                            sch_list.prepend('<div class="list-num">搜索结果如下：</div>');
+                            if (r.data.count == 0 && sch_list.find('.musics').length == 0) {
+                                $('.list-num').css('color', '#fb5158');
+                                $('.ss-empty').show();
+                            }else if(r.data.count == 0 && sch_list.find('.musics').length != 0){
+                                more.hide();
+                            } else {
+                                if (more.length == 0) {
+                                    $('.ss-empty').hide();
+                                    sch_list.append($('#more-template').html());
+                                    more = sch_list.find('.loadmore').hide();
+                                    more.click(load_search);
+                                }
+                                if (r.data.list.length > 0) {
+                                    var template = $('#ring-template').html();
+                                    for (var i in r.data.list) {
+                                        var d = r.data.list[i];
+                                        var li = $(template.format(parseInt(i) + data.start + 1, d.name, d.songer, d.ringid, d.coprinfo.cflag, d.springid)).data('coprinfo', d.coprinfo);
+                                        if(/^(\d){7}031(\d)+$/.test(app.spinfocode)) {li.find('.btn-download').hide();}
+                                        li.find('.btn-play').click(app.doPlay);
+                                        li.find('.btn-download').click(app.doDownload);
+                                        if (app.pushinfo.ringset.serve == 3 && d.coprinfo.type == '99') li.find('.btn-setring').addClass('gray');
+                                        else li.find('.btn-setring').click(app.doSetRing);
+                                        more.before(li);
+                                    }
+                                    if (r.data.count == sch_list.find('.musics').length) more.hide();
+                                    else more.show();
+                                }
+                            }
+                            $('.ss-input em').click(function () {
+                                $(this).parent().find('input').val('');
+                                $(this).hide();
+                                $('.ss-empty').hide();
+                                $('.ss-list').html('');
+                                sch.show();
+                            })
+                        }
+                    },
+                    complete: function () {
+                        mbox.close();
+                    }
+                });
+            }
+            //热门歌手
+            $.ajax({
+                url: "/proxy/v3/proxy.ahtml",
+                data: {
+                    cmd: 'get-taglist',
+                    type: 0,
+                    start: 0
+                },
+                dataType: 'json',
+                cache: true,
+                type: 'get',
+                beforeSend: function () {
+                    mbox.waiting('加载中，请稍候……');
+                },
+                success: function (r) {
+                    if (r.s == 1) {
+                        var template = '<li><a href="' + app.link('search,key={0}.html') + '"><span>{0}</span> </a></li>';
+                        for (var i in r.data.list) {
+                            var d = r.data.list[i];
+                            $('#songer-list').append(template.format(d.name, d.pid));
+                        }
+                        var _count = r.data.count;
+                        if (_count % 3 == 0) {
+                            $('.more li:last-child').css('border-bottom', 0);
+                            $('.more li:nth-last-child(2)').css('border-bottom', 0);
+                            $('.more li:nth-last-child(3)').css('border-bottom', 0);
+                        }
+                        if (_count % 3 == 1) {
+                            $('.more li:last-child').css('border-bottom', 0);
+                        }
+                        if (_count % 3 == 2) {
+                            $('.more li:last-child').css('border-bottom', 0);
+                            $('.more li:nth-last-child(2)').css('border-bottom', 0);
+                        }
+                    }
+                },
+                complete: function () {
+                    mbox.close();
+                }
+            });
+            /*最新下面广告位*/
+            if (app.pushinfo.ad && app.pushinfo.ad.img) {
+                var img = new Image();
+                img.src = app.pushinfo.ad.img;
+                if (app.pushinfo.ad.link) {
+                    if (app.pushinfo.ad.link.toLowerCase().startsWith('http://'))
+                        $(img).click(function () {
+                            window.open(app.pushinfo.ad.link, '_blank');
+                        });
+                    else
+                        $(img).click(eval(app.pushinfo.ad.link));
+                }
+                $('.laste-ban').append(img);
+            }
+            else{
+                var data = {
+                    cmd: 'get-parts',
+                    spinfocode: app.spinfocode,
+                    type: 1,
+                    start: 0,
+                    records: 5,
+                    w: 640
+                };
+                $.ajax({
+                    url: "/proxy/v3/proxy.ahtml",
+                    data: data,
+                    dataType: 'json',
+                    cache: true,
+                    type: 'get',
+                    beforeSend: function () {
+                        mbox.waiting('加载中，请稍候……');
+                    },
+                    success: function (r) {
+                        if(r.s == 1){
+                            for (var i in r.data.list) {
+                                var d = r.data.list[i];
+                                //var _li = '<li><a href="#"><img _src="images/m1.jpg" src="images/blank.png" /></a></li>';
+                                var li = '<li><a href="partlist,id='+d.pid+','+app.spinfocode+'.html"><img src="'+d.picpath+'" alt="'+d.name+'"></a></li>';
+                                $('#focus .bd ul').append(li);
+                            }
+                            TouchSlide({
+                                slideCell:"#focus",
+                                titCell:".hd ul", //开启自动分页 autoPage:true ，此时设置 titCell 为导航元素包裹层
+                                mainCell:".bd ul",
+                                effect:"left",
+                                autoPlay:true,//自动播放
+                                autoPage:true //自动分页
+                            });
+                        }
+                    },
+                    complete: function () {
+                        mbox.close();
+                    }
+                })
+            }
+            var idx = '<%- idx %>';
+            $(function () {
+                if (idx&&new RegExp("^[0-9]*$").test(idx)) menu.eq(idx).click();
+                else menu.eq(0).click();
+                $('.main').css('min-height', $(window).height() - $('header').height() - $('.nav-wrap').height() - $('footer').height());
+                if (app.spinfocode == '00000350311' || app.spinfocode == '00000350312') {
+                    $('.tips-text').hide();
+                }
+            });
+        }
+    }, 50);
+</script>
+<%- include include/foot.ejs %>

@@ -1,0 +1,25 @@
+.main{background: #fff3d9;padding-bottom: 1rem;}
+.ban2{position: relative;padding-bottom: .5rem;}
+.get-layer{position: absolute;top: 65%;left: 5%;width: 90%;text-align: center;}
+.getbtn-inner{width:100%;}
+.get-num{width:100%;text-align:center;font-size: .6rem;color: #fd6c6c;}
+.tip-prize span{color: #ffd230}
+.rule-layer{width: 80%;margin: .5rem auto;background: #fff;border-radius: .5rem;padding: .5rem 5%}
+.rule-tit{font-size: .65rem;font-weight: 700;color: #f12c64;background: url(/m/images/1/icon-heart.png) left center no-repeat;background-size: 1rem auto;-webkit-background-size: 1rem auto;padding-left: 1.25rem}
+.rule-layer li{margin-top: .25rem;font-size: .55rem;}
+.rule-layer li h3{background: url(/m/images/icon-lzs-2.png) no-repeat left center;background-size: .55rem .75rem;-webkit-background-size: .55rem .75rem;padding-left: 1rem;color: #333;}
+.rule-layer li p{margin-left: .25rem;color: #000;}
+.rule-layer li p span{color: #d0272e;}
+.rule-layer li p i {display: inline-block;height: .9rem;width: .9rem;background: #f5d523 url(/m/images/icon-vip.png) center no-repeat;background-size: .5rem;-webkit-background-size: .5rem;border-radius: .9rem;text-indent: -9999px;margin: 0 .15rem;}
+.ring-layer{margin: 1rem auto;background: #fff;width: 90%;border-radius: .5rem;}
+.ring-layer .tit-sm{font-size: .65rem;font-weight: 700;color: #f12c64;text-align: center;height: 2.75rem;line-height: 2.75rem;border-bottom: .05rem solid #f1f1f1;background: #fafafa;border-radius: .5rem .5rem 0 0;}
+.ring-list{background: #fff;}
+.musics{ position:relative; border-bottom:.05rem solid #f1f1f1;overflow:hidden;}
+.musics:nth-child(2n){background: #fafafa;}
+.loadmore{ background:#fff; text-align:center; font-size:.55rem; line-height:2.5rem;height:2.5rem;border: none;border-radius:0 0 .5rem .5rem}
+.loadmore-inner{height:2.5rem;line-height: 2.5rem;}
+.loadmore span{height:2.5rem;}
+.loadmore i{height: 2.5rem;;line-height: 2.5rem}
+.float-layer{background: #fff3d9;box-shadow: 0 0 5px rgba(0,0,0,.3);padding: 8px 0;position: fixed;left:0;right: 0;text-align: center;z-index: 997;opacity: 0;}
+.float-getbtn{width: 95%;margin: 0 auto;}
+.wzcon i {display: inline-block;height: .9rem;width: .9rem;background: #f5d523 url(/m/images/icon-vip.png) center no-repeat;background-size: 12px;-webkit-background-size: .6rem;border-radius: .9rem;text-indent: -9999px;margin: 0 .15rem;}

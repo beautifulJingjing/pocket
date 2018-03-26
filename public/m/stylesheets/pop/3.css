@@ -1,0 +1,23 @@
+.main{background: #edcb71;padding-bottom: 1.25rem;}
+.ban{position: relative;z-index:1;padding-bottom: 15px;}
+.ban .ban-img{position: relative;z-index: 0}
+.ban .music-bz{position: absolute;top:0;left:0;width:12%;z-index: 9}
+.page-bk{position: absolute;width: 88%;bottom: 0;left: 6%;}
+.get-num{width: 100%;color: #851d0c;font-size: .55rem;line-height: 1.5rem;height: 1.5rem;text-align: center}
+.get-num span{color: #f20c29}
+.getbtn-layer{width: 90%;margin: 0 auto;}
+.content-layer{width: 94%;margin: 0 auto;position: relative;}
+.module-middle-bg{background: url("/m/images/3/module-middle-bg.png") repeat-y;background-size: 100% auto;-webkit-background-size: 100% auto;}
+.tit-img{width: 100%;margin: .5rem 0 .5rem;}
+.rule-layer ul{color: rgba(59,55,51,.8);font-size:.55rem;width:100%;padding:.25rem .75rem .25rem .9rem;line-height: .9rem;box-sizing: border-box;-webkit-box-sizing: border-box}
+.rule-layer ul li{background: url("/m/images/3/icon-list.png") left .15rem no-repeat;background-size: .6rem;-webkit-background-size: .6rem;padding-left: .9rem}
+.rule-layer ul li h3 { position:relative;height:20px;line-height:20px}
+.rule-layer a{text-decoration: none;color: rgba(187,124,48,.8)}
+.rule-layer u{color: rgba(187,124,48,.8)}
+.rule-layer .icon-color{color: rgba(187,124,48,.8)}
+.ring-list{width: 95%;margin: 0 auto}
+.getBtn-layer{width: 90%;margin: 0 auto 15px;}
+.tips-layer{padding: .5rem .75rem 1rem;border-top: .05rem solid #f1f1f1;font-size: .55rem;color: #555;line-height: 1rem;width: 95%;box-sizing: border-box;-webkit-box-sizing: border-box}
+
+.float-layer{background: #fff;box-shadow: 0 0 5px rgba(0,0,0,.3);padding: 5px;position: fixed;left:0;right: 0;top:-60px;text-align: center;z-index: 999;opacity: 0;display: none}
+.float-getbtn{height: 45px;background: #ff6e6b;border-radius: 30px;border-bottom: 4px solid #d45b58;text-align: center;}

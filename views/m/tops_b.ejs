@@ -1,0 +1,62 @@
+﻿<%- include include/index/head-index.ejs %>
+<style type="text/css">
+/*排行榜*/
+.phinnner li{ width:100%; position:relative; border-bottom:1px solid #ccc; height:5em; list-style-type:none; overflow:hidden;}
+.ph_img{ position:absolute; left:0; top:0; width:5em;}
+.ph_info{ position:relative; margin:0 2.75em 0 6em; line-height:2em; padding:.5em 0; overflow:hidden;}
+.ph_info h3{ font-size:1.35em; height:1.5em; font-weight:400; overflow:hidden;}
+.ph_info h3 a{ color:#333;}
+.ph_info p{ height:1.5em; overflow:hidden;}
+.phinnner li span{ position:absolute; width:1em; height:2em; top:1.5em; right:1em;}
+</style>
+<div class="main">
+  <div class="phinnner">
+  </div>
+</div>
+<div id="top-template" style="display: none;">
+  <li><a href="partlist,id={3}.html">
+    <div class="ph_img"><img src="{0}" alt="{1}"></div>
+    <div class="ph_info">
+      <h3>{1}</h3>
+      <p>{2}</p>        
+    </div>
+    <span><img src="images/icons_go.jpg"></span>
+  </a></li>
+</div>
+<script>
+  var _top_wait = setInterval(function () {
+    if(diring_index_state) {
+      clearInterval(_top_wait);
+
+      var tops = $('.phinnner');
+      function load_list() {
+        var data = {
+          cmd: 'get-parts',
+          spinfocode: app.spinfocode,
+          type: 2
+        };
+        $.ajax({
+          url: "/proxy/v3/proxy.ahtml",
+          data: data,
+          dataType: 'json',
+          cache: true,
+          type: 'get',
+          beforeSend: function () { mbox.waiting('加载中，请稍候……'); },
+          success: function (r) {
+            if (r.s == 1) {
+              var template = $('#top-template').html();
+              for (var i in r.data.list) {
+                var d = r.data.list[i];
+                tops.append(template.format(d.picpath, d.name, d.summary, d.pid));
+              }
+            }
+          },
+          complete: function () { mbox.close(); }
+        });
+      }
+      load_list();
+    }
+  }, 50);
+</script>
+<%- include include/foot.ejs %>
+

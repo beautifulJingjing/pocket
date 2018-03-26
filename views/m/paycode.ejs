@@ -1,0 +1,281 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/m/stylesheets/pay.css">
+    <script src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript">
+        var temp_spinfocode = '<%- spinfocode %>';
+        var temp_isclick = <%- isclick %>;
+        var temp_config = <%- config %>;
+    </script>
+</head>
+<body>
+<script>
+    //控制页面自适应
+    var _winW = document.body.clientWidth || window.screen.width;
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+
+    var migu_state=true,open_migu_sdk_state=true,wx_sdk_state=false,diring_index_state=false,mobile_state=true,m2_m_state=true,init_state=true,wx_init_state=false,payment_state=false;
+
+    function creatScript(url,state){
+        var head= document.getElementsByTagName('head')[0];
+        var _js= document.createElement('script');
+        _js.type= 'text/javascript';
+        _js.title=state;
+        _js.onload = _js.onreadystatechange = function() {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                eval(_js.title+'=true');
+                _js.onload = _js.onreadystatechange = null;
+            }
+        };
+        _js.src= url;
+        head.appendChild(_js);
+    }
+
+    //creatScript('http://m.12530.com/order/pub-ui/js/and/migu.js','migu_state');
+    //creatScript('http://m.12530.com/order/pub-ui/js/and/openMusicSDK.js','open_migu_sdk_state');
+    creatScript('/m/scripts/diring-index.js','diring_index_state');
+    creatScript('/m/scripts/payment.js','payment_state');
+
+    /*var _mobile_wait = setInterval(function () {
+        if(diring_index_state ) {
+            clearInterval(_mobile_wait);
+            mobile_state = creatScript('/m/scripts/mobile_m.js','mobile_state');
+            m2_m_state = creatScript('/m/scripts/m2_m.js','m2_m_state');
+        }
+    }, 200);*/
+
+    //webjs初始化
+    var _head_wait = setInterval(function () {
+        if((migu_state && open_migu_sdk_state && diring_index_state && payment_state)) {
+            clearInterval(_head_wait);
+            //openMiGuInit("002100B");
+            init_state=true;
+        }
+    }, 200);
+
+</script>
+<div class="top">
+    <div class="l-info"><a href="/m/tem.html"><span class="icon-font iconfont-home"></span></a></div>
+    <div class="m-info"><!--口袋铃声--><span class="pocket-logo"></span></div>
+    <div class="r-info">
+        <!--<a href="/m/search.html" class="icon-font icon-iconfont-search"></a>-->
+        <a href="/m/usercenter.html" class="icon-font iconfont-user"></a>
+    </div>
+</div>
+<div class="qr-box">
+    <div class="pay-qr-tit">扫码支付（微信长按可付款）</div>
+    <div class="pay-qr-con">
+        <div class="qr-img"><img src=<%= imageurl %>></div>
+        <div class="qr-tips">
+            <h3>提示：</h3>
+            <div>
+                <p>1、如果您使用的是浏览器，请先保存二维码图片（截图或者直接保存），然后使用微信扫一扫功能→相册→扫描二维码付款。</p>
+                <p>2、如果你当前在微信中访问，直接长按识别图中二维码即可付款</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="pop-waiting-layer">
+    <div class="anim">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <span>加载中，请稍后……</span>
+</div>
+<div id="pop-msg-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/trace.js"></script>
+<script>
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
+    }
+    var ringid,plat,pro,orderidD;
+    var _root = window.location.host;
+
+    var _code_wait = setInterval(function () {
+        if ((diring_index_state && mobile_state && init_state && m2_m_state)){
+            clearInterval(_code_wait);
+            orderidD = getQueryString('orderidD');
+            ringid = getQueryString('ringid');
+            if(orderidD){
+                $.extend(app.user, {orderidD: true});
+                app.user.change.forEach(function (func) {
+                    func.call();
+                });
+                update_session({orderidD: true});
+            }
+            var waittime = 180000;
+            var _wait = setInterval(function(){
+                if(waittime >= 0){
+                    clearInterval(_wait);
+                    if(ringid){
+                        var data = {
+                            cmd: 'payed-set-ring',
+                            spinfocode: app.spinfocode,
+                            phone: app.user.phone,
+                            rid: ringid
+                        };
+                        var dosetring_ajaxSettings = {
+                            sender: sender,
+                            url: "/proxy/v3/proxy.aspx",
+                            data: data,
+                            dataType: 'json',
+                            cache: false,
+                            type: 'post',
+                            /*beforeSend: function () {
+                                mbox.waiting('处理中,请稍候……');
+                            },*/
+                            success: function (r) {
+                                mbox.close();
+                                var _msg = '';
+                                if (r.s == 1) {
+                                    app.user.orderidD = false;
+                                    $.extend(app.user, r.data);
+                                    app.user.change.forEach(function (func) {
+                                        func.call();
+                                    });
+                                    update_session({orderidD: false});
+                                    mbox.waiting('设置中,请稍候……');
+                                    if(r.crbt) {
+                                        if(r.crbt.s == 1) {
+                                            _msg = app.pushinfo.ringset.singleset.succ.content;
+                                            if (data.rid.toString().indexOf(',') > -1) {
+                                                _msg = app.pushinfo.ringset.muchset.succ.content;
+                                            }
+                                            if (dosetring_ajaxSettings.plus) {
+                                                switch (dosetring_ajaxSettings.plus.stack) {
+                                                    case 'openorder':
+                                                        _msg = app.pushinfo.order.succ.content + '\r\n' + _msg;
+                                                        break;
+                                                    case 'opencrbt':
+                                                        _msg = app.pushinfo.crbt.succ.content + '\r\n' + _msg;
+                                                        break;
+                                                }
+                                            }
+                                            mbox.alertMsg({
+                                                title: '彩铃设置',
+                                                explain: _msg,
+                                                confirmEvent: closeTz
+                                            });
+                                        }
+                                        else if (r.crbt.s == 31) {  //彩铃尚未开通成功
+                                            if (app.pushinfo.crbt.asyncsucc.content) _msg = app.pushinfo.crbt.asyncsucc.content;
+                                            else  _msg = r.crbt.msg;
+                                            mbox.alertMsg({
+                                                title: '彩铃设置',
+                                                explain: _msg,
+                                                confirmEvent: closeTz
+                                            });
+                                        }
+                                        else {
+                                            _msg = app.pushinfo.ringset.singleset.fail.content;
+                                            _msg += '<br/><a href="{1}" class="uline">{0}</a>'.format('还是不行?去看看其他铃声吧', 'https://'+_root+'/m/tem,'+app.spinfocode+'.html');
+                                            mbox.alertMsg({
+                                                title: '温馨提示',
+                                                explain: _msg,
+                                                confirmEvent: closeTz
+                                            });
+
+                                        }
+                                    }
+                                }
+                                else if(r.s == -1003){  //尚未开通会员服务
+                                    $.ajax(dosetring_ajaxSettings);
+                                }
+                                else{
+                                    _msg = r.msg;
+                                    mbox.alertMsg({
+                                        title: '温馨提示',
+                                        explain: _msg,
+                                        confirmEvent: closeTz
+                                    });
+                                }
+                            }
+                        };
+                        $.ajax(dosetring_ajaxSettings);
+                    }
+                    else{
+                        var ajaxSettings = {
+                            url: "/proxy/v3/proxy.aspx",
+                            data: {
+                                cmd: 'check-crbt-open',
+                                phone: app.user.phone,
+                                spinfocode: app.spinfocode
+                            },
+                            dataType: 'json',
+                            cache: false,
+                            type: 'get',
+                            /*beforeSend: function () {
+                                mbox.waiting('处理中,请稍候……');
+                            },*/
+                            success: function(r){
+                                _msg = '';
+                                mbox.close();
+                                if(r.s == 1){
+                                    $.extend(app.user, r.data);
+                                    app.user.change.forEach(function (func) {
+                                        func.call();
+                                    });
+                                    mbox.waiting('处理中,请稍候……');
+                                    _msg = app.pushinfo.order.succ.content
+                                    if (app.pushinfo.declare.message.content){
+                                        _msg += '<br/><a href="{1}" class="uline">{0}</a>'.format(app.pushinfo.declare.message.content, app.pushinfo.declare.message.link);
+                                    }
+                                    mbox.alertMsg({
+                                        title: '温馨提示',
+                                        explain: _msg,
+                                        confirmEvent: closeTz
+                                    });
+                                }
+                                else{
+                                    $.ajax(ajaxSettings);
+                                }
+                            }
+                        };
+                        $.ajax(ajaxSettings);
+                    }
+                }
+                waittime -= 1000;
+            },1000)
+        }
+    },1000);
+    function closeTz(){
+        window.location.href = 'https://'+_root+'/m/tem,' + app.spinfocode + '.html';
+        mbox.close();
+    }
+</script>
+<script type="text/javascript">
+    var imageurl = "<%=imageurl%>";
+</script>
+</body>
+</html>

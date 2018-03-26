@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>口袋铃声</title>
+    <meta name="keywords" content="铃声设置，铃音设置，设铃声，振铃，免费下载，安卓，iPhone，Android，手机应用，移动互联网，一键设置，海量铃音库，正版" />
+    <meta name="description" content="铃声设置是一款为智能手机量身定做的铃声设置工具，它拥有20万的海量正版曲库，设置铃声方便快捷，同时支持ios和Android两个平台" />
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <link rel="shortcut icon" href="/download/m/images/favicon.ico">
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px 'Arial'/*,'黑体'*/,'Microsoft Yahei','Simsun';color:#808080;background:#fff; min-width:320px; height:100%;}
+        body,div,p,a,li,ul,ol,span,input,dl,dd,dt,form,h1,h2,h3,h4,h5,h6,select,pre,img,textarea{padding:0;margin:0;outline:none;font-size:system;border:0 none;text-decoration:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+        form{display:inline}
+        ul,ol{list-style:none}
+        a{text-decoration:none;color:#808080;}
+        u{ text-decoration:none; color:#ef3a2d;}
+        img{ border:0; display:block; width:100%;}
+        button,input,select,textarea{font-size:100%;vertical-align:middle;outline:none;}
+        textarea{resize:none}
+        button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;-moz-appearance:button}
+        input {-webkit-user-select: text}
+        input:focus:-moz-placeholder,input:focus::-webkit-input-placeholder{color:transparent}
+        button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+        table{border-collapse:collapse;border-spacing:0}
+        header,footer,article,section,nav,menu{display:block;clear:all;}
+
+        body{background: #ff6269}
+        .wrapper{position: relative;}
+        .main-content{height: 14rem;width: 8.3rem;position: absolute;top: 50%;left: 50%;margin: -7rem 0 0 -4.15rem}
+        .down-logo{width: 6.75rem;height: 6rem;margin: 0 auto}
+        .down-btn{width: 8.3rem;margin-top: 3.8rem;}
+        .down-btn div{margin-top: .75rem}
+        .foot-content{width: 100%;position: absolute;bottom: 0;left: 0;padding-bottom: .75rem;}
+        .foot-content img{width: 4rem;margin: 0 auto;}
+        .tips-layer{position: absolute;top: 0;left: 0;background: rgba(0,0,0,.65);display: none;}
+        .tips-img{width: 85%;margin: 2rem auto 0;}
+    </style>
+    <script src="/javascripts/zepto.min.js"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="main-content">
+        <div class="down-logo"><img src="/download/m/images/download-logo.png"> </div>
+        <div class="down-btn">
+            <div class="down-ios"><img src="/download/m/images/down-ios-btn.png"> </div>
+            <div class="down-android"><img src="/download/m/images/down-android-btn.png"> </div>
+        </div>
+    </div>
+    <div class="foot-content"><img src="/download/m/images/foot-tip.png"> </div>
+    <div class="tips-layer"><img src="/download/m/images/tips-img.png" class="tips-img"> </div>
+</div>
+<script type="text/javascript">
+    var _winW = $(window).width(),_winH = $(window).height();
+
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+    $('.wrapper,.tips-layer').css({'width':_winW,'height':_winH})
+
+    $(function(){
+        $('.down-ios').on('click',function(){
+            window.location.href = "https://itunes.apple.com/cn/app/id1116910750?mt=8";
+            _hmt.push(['_trackEvent', 'mobile-ios下载']);
+        })
+
+        $('.down-android').on('click',function(){
+            window.location.href = "https://mt.ringbox.cn/d/apk/BoxRing_weibo.apk";
+            _hmt.push(['_trackEvent', 'mobile-android下载']);
+        })
+        var ua = window.navigator.userAgent.toLowerCase();
+        if(ua.match(/MicroMessenger/i) == 'micromessenger') $('.tips-layer').show();
+        else $('.tips-layer').hide();
+
+    })
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+</body>
+</html>

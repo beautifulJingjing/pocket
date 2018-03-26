@@ -1,0 +1,108 @@
+<%- include ../include/index/head-index.ejs %>
+<link href="/m/stylesheets/pop/2.css" type="text/css" rel="stylesheet">
+<div class="main">
+    <div class="ban"><img src="/m/images/2/ban.jpg"></div>
+    <div class="page-bk">
+        <div class="get-num"></div>
+        <div class="getBtn-layer"><img src="/m/images/2/get-btn.gif"> </div>
+        <div class="rule-layer">
+            <ul class="clear">
+            </ul>
+        </div>
+    </div>
+    <div class="content-layer">
+        <div class="content-tit">本月最新最热铃声都在这里 ↓</div>
+        <div class="ring-list"></div>
+        <div class="loadmore"><div class="loadmore-inner"><i class="icon-font iconfont-load"></i><span>点击加载更多</span></div></div>
+        <div class="tips-layer">小贴士：如手机不支持振铃下载，请通过pc浏览器（chrome）下载后同步到手机</div>
+    </div>
+</div>
+<div id="ring-template" class="hide">
+    <div class="musics clear">
+        <div class="left-area">
+            <em>{0}</em>
+            <a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="controlbtn btn-play">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="icon-font icon-color iconfont-ringSet btn-setring"></a>
+                <a href="javascript:void(0);" data-rid="{3}" data-rname="{1}" class="icon-font icon-color iconfont-ringDown btn-download"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font icon-color iconfont-vip vip"></i><span>{2}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="float-layer">
+    <div class="float-getbtn"><img src="/m/images/2/get-btn.gif"></div>
+</div>
+<script>
+    //webjs初始化
+    var _load_list_wait = setInterval(function () {
+        if(diring_index_state) {
+            clearInterval(_load_list_wait);
+
+            $.ajax({
+                url: "/proxy/v3/proxy.aspx",
+                data: {
+                    cmd: "get-receivenum",
+                    spinfocode: app.spinfocode,
+                    modeltype:'1'
+                },
+                dataType: 'json',
+                cache: false,
+                type: 'get',
+                success: function (r) {
+                    if (r.s == 1) $('.get-num').html('已有' + r.data + '人领取了福利');
+                }
+            });
+            $('.rule-layer ul').append(app.pushinfo.declare.intro.content);
+            var more = $('.loadmore');
+            function load_list() {
+                var data = {
+                    spinfocode: app.spinfocode,
+                    cmd: 'get-ringlist',
+                    pid: app.pushinfo.hotlist.list[0].id,
+                    start: more.prev().children().length,
+                    records: 10
+                };
+                $.ajax({
+                    url: "/proxy/v3/proxy.ahtml",
+                    data: data,
+                    dataType: 'json',
+                    cache: true,
+                    type: 'get',
+                    beforeSend: function () { more.off('click').children('span').text('正在加载……'); },
+                    success: function (r) {
+                        if (r.s == 1) {
+                            var template = $('#ring-template').html();
+                            for (var i in r.data.list) {
+                                var d = r.data.list[i];
+                                var li = $(template.format(parseInt(i) + data.start + 1, d.name, d.songer, d.ringid, d.coprinfo.cflag,d.springid));
+                                if (d.isnew == '1') li.find('.vip').before('<i class="new">新</i>');
+                                if (d.ishot == '1') li.find('.vip').before('<i class="hot">热</i>');
+
+                                //加事件
+                                li.find('.btn-play').click(app.doPlay);
+                                li.find('.btn-download').click(app.doDownload);
+                                li.find('.btn-setring').click(app.doSetRing);
+                                more.prev().append(li);
+                            }
+                            if (data.records > r.data.list.length) more.hide();
+                            else more.click(load_list).children('span').text('加载更多');
+                        }
+                    }
+                });
+            }
+            load_list();
+
+            $('.getBtn-layer, .float-getbtn').click(app.doOnServe);
+        }
+    }, 50);
+
+</script>
+<%- include ../include/foot.ejs %>

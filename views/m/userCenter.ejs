@@ -1,0 +1,244 @@
+﻿<%- include include/index/head-index.ejs %>
+<link rel="stylesheet" href="/m/stylesheets/usercenter.css">
+<div class="main">
+    <%if(_phone){%>
+    <div class="c" style="display: none">
+        <div class="form">
+            <p class="clear" id="phone-verifi">
+                <!--<i class="icon-font iconfont-phone"></i>-->
+                <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+            </p>
+            <p class="clear" id="code-verifi">
+                <!--<i class="icon-font iconfont-sms"></i>-->
+                <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-take">获取短信验证码</a>
+            </p>
+            <button class="btn-ok" id="onlyBtn">确定</button>
+            <div class="two-btn clear">
+                <button class="btn-cancle fl">取消</button>
+                <button class="btn-ok fr" id="changeOkBtn">确定</button>
+            </div>
+        </div>
+        <div class="privilege">
+            <div class="text-tit"><i></i><em>VIP会员特权</em></div>
+            <ul class="privilege-list clear">
+                <li>
+                    <span class="icon-01"></span>
+                    <h4>尊贵VIP标识</h4>
+                    <p>酷炫图标，彰显土豪身份</p>
+                </li>
+                <li>
+                    <span class="icon-02"></span>
+                    <h4>高清铃声免费试听</h4>
+                    <p>2,000,000首任你听</p>
+                </li>
+                <li>
+                    <span class="icon-03"></span>
+                    <h4>高清彩铃免费更换</h4>
+                    <p>2,000,000首无限更换</p>
+                </li>
+                <li>
+                    <span class="icon-04"></span>
+                    <h4>高清振铃免费下载</h4>
+                    <p>2,000,000首无限下载</p>
+                </li>
+                <li>
+                    <span class="icon-05"></span>
+                    <h4>VIP免费抽奖特权</h4>
+                    <p>话费/流量等奖品免费拿</p>
+                </li>
+                <li>
+                    <span class="icon-06"></span>
+                    <h4>VIP免广告特权</h4>
+                    <p>让你安静享受音乐</p>
+                </li>
+            </ul>
+        </div>
+        <section class="explanation-layout">
+            <div class="sm-text">
+                <div class="text-tit"><i></i><em>温馨提示</em></div>
+                <p class="p1">口袋铃声VIP会员，联通用户原价6元/月，活动价：50元/12个月、28元/6个月、15元/3个月，后续还有更多VIP会员专享福利。</p>
+                <p class="p1">海量彩铃免费不限次更换，需彩铃功能支持，如果您未开通，我们将为您开通，参考资费5元/月，联通4G用户0元/月，如有疑问请详询本地运营商。</p>
+            </div>
+        </section>
+    </div>
+    <div>
+        <div class="member clear">
+            <div class="clear">
+                <img src="images/img-user.png">
+                <h3><%= phone%></h3>
+                <p><%= orderstate%></p>
+                <a href="javascript:;" class="btn-change">更换手机号</a>
+            </div>
+            <button class="btn-upgrade">升级VIP会员</button>
+        </div>
+        <div class="ring-library default-ringList">
+            <h2>默认彩铃</h2>
+            <div class="ringList-no" id="ringList-no-ringDefault">
+                <span class="icon-font iconfont-empty"></span>
+                <p>还没有默认彩铃，快去设置吧！</p>
+            </div>
+            <div class="mobileDefault-library-list"></div>
+        </div>
+        <div class="ring-library">
+            <h2>个人铃音库</h2>
+            <div class="ringList-no" id="ringList-no-ring">
+                <span class="icon-font iconfont-empty"></span>
+                <p>还没有个人铃音，快去设置吧！</p>
+            </div>
+            <div class="library-list"></div>
+            <div class="mobile-library-list"></div>
+            <!--<div class="loadmore"><span>点击加载更多</span></div>-->
+        </div>
+    </div>
+    <%}else{%>
+    <div class="c">
+        <div class="form">
+            <p class="clear" id="phone-verifi">
+                <!--<i class="icon-font iconfont-phone"></i>-->
+                <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+            </p>
+            <p class="clear" id="code-verifi">
+                <!--<i class="icon-font iconfont-sms"></i>-->
+                <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-take">获取短信验证码</a>
+            </p>
+            <button class="btn-ok" id="onlyBtn">确定</button>
+            <div class="two-btn clear">
+                <button class="btn-cancle fl">取消</button>
+                <button class="btn-ok fr" id="changeOkBtn">确定</button>
+            </div>
+        </div>
+        <div class="privilege">
+            <div class="text-tit"><i></i><em>VIP会员特权</em></div>
+            <ul class="privilege-list clear">
+                <li>
+                    <span class="icon-01"></span>
+                    <h4>尊贵VIP标识</h4>
+                    <p>酷炫图标，彰显土豪身份</p>
+                </li>
+                <li>
+                    <span class="icon-02"></span>
+                    <h4>高清铃声免费试听</h4>
+                    <p>2,000,000首任你听</p>
+                </li>
+                <li>
+                    <span class="icon-03"></span>
+                    <h4>高清彩铃免费更换</h4>
+                    <p>2,000,000首无限更换</p>
+                </li>
+                <li>
+                    <span class="icon-04"></span>
+                    <h4>高清振铃免费下载</h4>
+                    <p>2,000,000首无限下载</p>
+                </li>
+                <li>
+                    <span class="icon-05"></span>
+                    <h4>VIP免费抽奖特权</h4>
+                    <p>话费/流量等奖品免费拿</p>
+                </li>
+                <li>
+                    <span class="icon-06"></span>
+                    <h4>VIP免广告特权</h4>
+                    <p>让你安静享受音乐</p>
+                </li>
+            </ul>
+        </div>
+        <section class="explanation-layout">
+            <div class="sm-text">
+                <div class="text-tit"><i></i><em>温馨提示</em></div>
+                <p class="p1">口袋铃声VIP会员，联通用户原价6元/月，活动价：50元/12个月、28元/6个月、15元/3个月，后续还有更多VIP会员专享福利。</p>
+                <p class="p1">海量彩铃免费不限次更换，需彩铃功能支持，如果您未开通，我们将为您开通，参考资费5元/月，联通4G用户0元/月，如有疑问请详询本地运营商。</p>
+            </div>
+        </section>
+    </div>
+    <div style="display: none">
+        <div class="member clear">
+            <div class="clear">
+                <img src="images/img-user.png">
+                <h3><%= phone%></h3>
+                <p><%= orderstate%></p>
+                <a href="javascript:;" class="btn-change">更换手机号</a>
+            </div>
+            <button class="btn-upgrade">升级VIP会员</button>
+        </div>
+        <div class="ring-library default-ringList">
+            <h2>默认彩铃</h2>
+            <div class="ringList-no" id="ringList-no-ringDefault">
+                <span class="icon-font iconfont-empty"></span>
+                <p>还没有默认彩铃，快去设置吧！</p>
+            </div>
+            <div class="mobileDefault-library-list"></div>
+        </div>
+        <div class="ring-library">
+            <h2>个人铃音库</h2>
+            <div class="ringList-no" id="ringList-no-ring">
+                <span class="icon-font iconfont-empty"></span>
+                <p>还没有个人铃音，快去设置吧！</p>
+            </div>
+            <div class="library-list"></div>
+            <div class="mobile-library-list"></div>
+            <!--<div class="loadmore"><span>点击加载更多</span></div>-->
+        </div>
+    </div>
+    <%}%>
+</div>
+<div id="crbt-template" style="display: none;">
+    <div class="musics clear">
+        <div class="left-area">
+            <em>{0}</em>
+            <!--<a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="controlbtn btn-play">暂停/播放</a>-->
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <!--<a href="javascript:void(0);" data-rid="{2}" data-flag="{4}" class="btn-setring">设铃</a>-->
+                <a href="javascript:void(0);" data-rid="{2}" class="icon-font icon-color iconfont-ringDelete btn-del"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font icon-color iconfont-queen vip"></i><span>{3}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="crbt-template-canlisten" style="display: none;">
+    <div class="musics clear">
+        <div class="left-area">
+            <em>{0}</em>
+            <a href="javascript:void(0);" data-address="{2}" data-rid="{3}" data-contentid="{4}" class="controlbtn btn-play">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <a href="javascript:void(0);" data-address="{2}" data-contentid="{4}" class="btn-setDefault">设为默认</a>
+                <a href="javascript:void(0);" data-address="{2}" data-contentid="{4}" class="icon-font icon-color iconfont-ringDelete btn-del"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font icon-color iconfont-queen vip"></i><span>{3}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="crbt-template-mobileDefault" style="display: none;">
+    <div class="musics clear">
+        <div class="left-area">
+            <em class="icon-font iconfont-ringDefault icon-ringDefault"></em>
+            <a href="javascript:void(0);" data-address="{2}" data-rid="{3}" data-contentid="{4}" class="controlbtn btn-play">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font icon-color iconfont-queen vip"></i><span>{3}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var form,phone,code,take,member,change,ope;function load_list(){var data={cmd:'user-get-crbt-list',spinfocode:app.spinfocode,start:ope.children().length,records:records};if(_mobilecom.regexPhone.test(app.user.phone)){mbox.waiting('铃音列表加载中,请稍候……');qryDefRing();getUserRingBase_list()}else{$.ajax({url:"/proxy/v3/proxy.aspx",data:data,dataType:'json',cache:true,type:'get',beforeSend:function(){mbox.waiting('加载中，请稍候……');more.off('click').children('span').text('正在加载……')},success:function(r){if(r.s==1){if(r.data.list.length==0){ope.hide()}else{ope.show();ope.prev().hide();$('.default-ringList').hide();var template=$('#crbt-template').html();for(var i in r.data.list){var d=r.data.list[i];var li=$(template.format(parseInt(i)+data.start+1,d.name,d.ringid,d.introduction));if(d.sourceid=='0')li.find('a.btn-del').hide().parent().append('<span>(默认不可删)</span>');li.find('.btn-del').click(app.doDelRing);ope.append(li)}}}},complete:function(){mbox.close()}})}};var _usercenter_wait=setInterval(function(){if((diring_index_state&&mobile_state&&init_state&&m2_m_state)){clearInterval(_usercenter_wait);$('.help').show();form=$('.form'),phone=$('.phone'),code=$('.code'),take=$('.btn-take'),member=$('.member'),change=$('.btn-change');ope=$('.library-list'),records=30,more=$('.loadmore');app.user.change.push(function(){$('.curnum').remove();if(app.user.phone&&(_mobilecom.regexPhone.test(app.user.phone)||app.user.phone.indexOf('@')!=-1)){if(app.user.token){if(app.user.orderstate==2){member.find('h3').html(app.user.phone).next().html('会员<i class="icon-queen"></i>');member.find('img').attr('src','images/img-user-vip.png');$('.btn-upgrade').hide()}else{member.find('h3').html(app.user.phone).next().html('非会员');$('.btn-upgrade').css('display','block').click(function(e){mbox.waiting('正在查询【中国移动-音乐包服务】,请稍候……');iscrbt({resCode:'000000',resMsg:'预查询',status:app.user.ringstate})})};$('.mobile-library-list').html('');form.parent().hide().next().show();load_list()}else{form.parent().show().next().hide();app.log({name:'centerLogin'})}}else{if(app.user.logined()){form.parent().hide().next().show();member.find('h3').html(app.user.phone+'&nbsp;&nbsp;&nbsp;<a href="javascript:;" class="refresh">更新状态</a>').next().html(app.user.orderstatestr);$('.refresh').off('click').click(function(){$.ajax({url:"/proxy/v3/proxy.aspx",data:{cmd:'login-get-userinfo',phone:app.user.phone,spinfocode:app.spinfocode},dataType:'json',cache:false,type:'get',success:function(r){if(r.s==1){$.extend(app.user,r.data);$.extend(app.user,{orderidD:false});app.user.change.forEach(function(func){func.call()});update_session({orderidD:false});window.location.reload()}else{mbox.alertMsg({explain:'会员尚未开通，请点击升级VIP会员加入会员！',confirmEvent:function(){$('.refresh').hide();mbox.close()}})}}})});if(app.user.isorder()){member.find('h3').html(app.user.phone).next().html(app.user.orderstatestr+'<i class="icon-queen"></i>');member.find('img').attr('src','images/img-user-vip.png');$('.btn-upgrade').hide();$('.refresh').hide()}else{$('.btn-upgrade').css('display','block').click(function(e){if(unicom.regexPhone.test(app.user.phone)){app.doOnServe(e,{_unicom:true})}else{phone.val(app.user.phone);code.val('');form.parent().show().next().hide();$('#onlyBtn').hide();$('.two-btn').show();app.log({name:'centerLogin'})}})};load_list()}else{form.parent().show().next().hide();if(app.user.phone){phone.val(app.user.phone);take.click();};app.log({name:'centerLogin'})}}});app.user.change.forEach(function(func){func.call()});take.click(function(e){app.doSendCheckcode(e,{checking:{btn_code:take,phone:phone},phone:phone.val()});$('#box-click').remove();app.isclick=true;if(phone.val()&&mobilecom.regexPhone.test(phone.val())){_temp_user.phone=phone.val();_temp_mob_loadin();var timer=30000;var _temp_wait=setInterval(function(){timer=timer-500;if(_temp_user.token||timer<=0){clearInterval(_temp_wait);if(_temp_user.token){app.log({name:'before_checkphone_getringstate',type:'Interface',params:{phone:phone.val()}});queryOpenRingYN({youCallbackName:"_temp_iscrbt",channelCode:channelCode,token:_temp_user.token});}else{init_temp_user()}}},500)}});$('#onlyBtn,#changeOkBtn').off('click').click(function(e){isUserCenter=true;app.doLogin(e,{phone:phone.val().trim(),checkcode:code,cmd:'phonechecked'});app.log({name:'dologin',params:{phone:phone.val().trim()}})});change.off('click').click(function(){phone.val('');code.val('');form.parent().show().next().hide();$('#onlyBtn').hide();$('.two-btn').show();app.log({name:'alertLogin'})});$('.btn-cancle').click(function(){form.parent().hide().next().show()});phone.blur(function(){var _this=$(this);if(_this.val().length==11){if(phonecom.regexPhone.test(_this.val())){$('#box-phone').remove()}else{mbox.verification($('#phone-verifi'),'亲，别闹了，搞个正确的手机号码再来！','box-phone')}}}).focus(function(){$('#box-phone').remove()});code.focus(function(){$('#box-code').remove()});form.on('click','input',function(){$(this).parent().addClass('p-cur').siblings().removeClass('p-cur')}).on('blur','input',function(){$(this).parent().removeClass('p-cur')});if(app.spinfocode=='00000350312')$('.cost-p').html('VIP会员，移动用户6元/月，电信用户6元/月，联通用户当月免费次月开始5元/月。后续还有更多VIP会员专享福利。');var ua=navigator.userAgent;if(ua.indexOf("RingBoxWebProj")>0||ua.indexOf("boxringAndroid")>0){$('.btn_back').parent().hide()}}},50);
+</script>
+<%- include include/foot.ejs %>
+

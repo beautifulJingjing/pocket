@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/m/stylesheets/share.css">
+    <style type="text/css">
+        #slid-layer-1{display: block;left: 0}
+        #slid-layer-1 .musics a.btn-play {background: url(/m/images/btn-play-red-1.png) left center no-repeat;background-size: 1.5rem auto;-webkit-background-size: 1.5rem auto;-moz-background-size: 1.5rem auto;-o-background-size: 1.5rem auto;}
+        #slid-layer-1 .musics a.btn-pause {background: url(/m/images/btn-pause-red-1.gif) left center no-repeat;background-size: 1.46rem auto;-webkit-background-size: 1.46rem auto;-moz-background-size: 1.46rem auto;-o-background-size: 1.46rem auto;}
+        #slid-layer-1 .privilege-list p{border-bottom: 0;padding: 0}
+        .sm-text{margin-top: 1.5rem;}
+        .sm-text em{background: #fff;}
+    </style>
+    <script src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript">
+        var temp_spinfocode = '<%- spinfocode %>';
+        var temp_isclick = <%- isclick %>;
+        var temp_config = <%- config %>;
+    </script>
+</head>
+<body>
+<script>
+    //控制页面自适应
+    var _winW = document.body.clientWidth || window.screen.width;
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+
+    var migu_state=false,open_migu_sdk_state=false,wx_sdk_state=false,diring_index_state=false,mobile_state=false,m2_m_state=false,init_state=false,wx_init_state=false;
+
+    function creatScript(url,state){
+        var head= document.getElementsByTagName('head')[0];
+        var _js= document.createElement('script');
+        _js.type= 'text/javascript';
+        _js.title=state;
+        _js.onload = _js.onreadystatechange = function() {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                eval(_js.title+'=true');
+                _js.onload = _js.onreadystatechange = null;
+            }
+        };
+        _js.src= url;
+        head.appendChild(_js);
+    }
+
+    creatScript('http://m.12530.com/order/pub-ui/js/and/migu.js','migu_state');
+    creatScript('http://m.12530.com/order/pub-ui/js/and/openMusicSDK.js','open_migu_sdk_state');
+    creatScript('/m/scripts/diring-index_m.js','diring_index_state');
+
+    var _mobile_wait = setInterval(function () {
+        if(diring_index_state) {
+            mbox.waiting('彩铃信息加载中,请稍等片刻……');
+            clearInterval(_mobile_wait);
+            mobile_state = creatScript('/m/scripts/mobile_m.js','mobile_state');
+            m2_m_state = creatScript('/m/scripts/m2_m.js','m2_m_state');
+        }
+    }, 200);
+
+    //webjs初始化
+    var _head_wait = setInterval(function () {
+        if((migu_state && open_migu_sdk_state && diring_index_state)) {
+            clearInterval(_head_wait);
+            openMiGuInit("002100B");
+            init_state=true;
+        }
+    }, 200);
+
+</script>
+<div style="display: none">
+    <img src="/m/images/300x300.jpg" />
+</div>
+<div id="pop-waiting-layer">
+    <div class="anim">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <span>加载中，请稍后……</span>
+</div>
+<div id="pop-msg-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<div id="pop-del-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<div id="slid-layer-1" class="slid-layer">
+    <div class="t">
+        <span>彩铃设置</span>
+    </div>
+    <div class="musics clear"></div>
+    <div class="member-tip">
+        <em></em>
+        <div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>加入VIP会员，畅享彩铃无限量更换<i>(0元/首)</i></div>
+    </div>
+    <div class="c">
+        <div class="checking">
+            <p class="clear" id="phone-verifi">
+                <!--<i class="icon-font iconfont-phone"></i>-->
+                <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+            </p>
+            <p class="clear" id="code-verifi">
+                <!--<i class="icon-font iconfont-sms"></i>-->
+                <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-code">获取短信验证码</a>
+            </p>
+            <!--下载登录成功提示-->
+            <div class="down-tip"></div>
+            <button class="btn-ok">确定</button>
+            <div class="msg"></div>
+        </div>
+        <div class="service" style="display: none;font-size: .75rem; line-height: 2.25rem;">
+            <div class="service-box" style="padding-left: 0">
+                <div style="position: relative;padding-left: 2.75rem">
+                    <img src="/m/images/img-user.png" style="top: -.25rem;">
+                    <p class="clear num-p"><span><b></b>，您好！</span><a href="javascript:;" class="btn-change">更换手机号</a></p>
+                </div>
+                <p class="confirm"></p>
+                <div class="mobile-fee-text" style="display: none;"><span></span>设置该首彩铃需升级为VIP会员，是否确认升级并设置该首彩铃？</div>
+                <div class="mobile-crbt clear"></div>
+                <div class="mobile-order clear"></div>
+            </div>
+            <button class="btn-ok"></button>
+            <div class="msg"></div>
+            <div class="sm-text" style="display: none">
+                <div class="text-tit"><i></i><em>VIP会员特权</em></div>
+                <ul class="privilege-list clear">
+                    <li>
+                        <span class="icon-01"></span>
+                        <h4>尊贵VIP标识</h4>
+                        <p>酷炫图标，彰显土豪身份</p>
+                    </li>
+                    <li>
+                        <span class="icon-02"></span>
+                        <h4>高清铃声免费试听</h4>
+                        <p>2,000,000首任你听</p>
+                    </li>
+                    <li>
+                        <span class="icon-03"></span>
+                        <h4>高清彩铃免费更换</h4>
+                        <p>2,000,000首无限更换</p>
+                    </li>
+                    <li>
+                        <span class="icon-04"></span>
+                        <h4>高清振铃免费下载</h4>
+                        <p>2,000,000首无限下载</p>
+                    </li>
+                    <li>
+                        <span class="icon-05"></span>
+                        <h4>VIP免费抽奖特权</h4>
+                        <p>话费/流量等奖品免费拿</p>
+                    </li>
+                    <li>
+                        <span class="icon-06"></span>
+                        <h4>VIP免广告特权</h4>
+                        <p>让你安静享受音乐</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="explain" style="display: none;">
+            <div class="explain-box">
+                <img src="/m/images/img-user.png">
+                <div class="msg"></div>
+            </div>
+            <button class="btn-ok"></button>
+        </div>
+    </div>
+    <div class="member-privilege"></div>
+</div>
+<script src="/javascripts/trace.js"></script>
+<script>
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    var phone,code,take,change,member;
+    var _share_wait = setInterval(function () {
+        if ((diring_index_state && mobile_state && init_state && m2_m_state)) {
+            clearInterval(_share_wait);
+            isSharePage=true;
+            var checking = $('.checking');
+            var service = $('.service');
+            var explain = $('.explain');
+            phone=$('.phone'),code=$('.code'),take=$('.btn-code'),
+                    change=$('.btn-change'),member=$('.service');
+            var sch_key = null;
+            flag_listen = 1;
+            if (sch_key = $.request('key')) {
+                $.ajax({
+                    url: "/proxy/v3/proxy.aspx",
+                    data: {
+                        cmd: 'get-ringinfo',
+                        ringid:sch_key
+                    },
+                    dataType: 'json',
+                    cache: false,
+                    type: 'get',
+                    success: function (r) {
+                        if (r.s==1) {
+                            is_setring = r.data.springid;
+                            var ringinfo ='<div class="left-area"><em></em><a href="javascript:void(0);" data-rid="'+r.data.ringid+'" data-sprid="'+r.data.springid+'" class="controlbtn btn-play">暂停/播放</a></div><div class="pinfo"><div class="fr set"><a href="javascript:void(0);" data-rid="'+r.data.ringid+'" data-flag="2001" data-sprid="'+r.data.springid+'" class="icon-font icon-color iconfont-ringSet btn-setring"></a><a href="javascript:void(0);" data-rid="'+r.data.ringid+'" data-rname="'+r.data.name+'" data-sprid="'+r.data.springid+'" class="icon-font icon-color iconfont-ringDown btn-download"></a> </div><div><a href="javascript:void(0);" class="btn-play"><p class="name">'+r.data.name+'</p><p class="lh">';
+                            if(r.data.isnew==1) {
+                                ringinfo+='<i class="new">新</i>';
+                            }
+                            if(r.data.ishot==1) {
+                                ringinfo+='<i class="icon-font iconfont-vip vip"></i>';
+                            }
+                            ringinfo+='<span>'+r.data.ringer+'</span></p></a></div></div>';
+                            $('.musics').html(ringinfo);
+                            $('.musics').find('.set').hide();
+                            $('.musics').find('.btn-play').click(app.doPlay);
+                            document.title = r.data.name +' - '+ r.data.ringer +'-口袋铃声';
+
+                            var sender = $('.musics .pinfo a');
+                            var dosetring_ajaxSettings = {
+                                sender: sender,
+                                url: "/proxy/v3/proxy.aspx",
+                                data: {
+                                    cmd: 'set-ring',
+                                    spinfocode: app.spinfocode,
+                                    rid: sender.data('rid'),
+                                    type: sender.data('type') || 1,
+                                    flag: sender.data('flag')
+                                },
+                                dataType: 'json',
+                                cache: false,
+                                type: 'post',
+                                beforeSend: function () {
+                                    mbox.waiting('设置中,请稍候……');
+                                },
+                                success: function (r) {
+                                    mbox.close();
+                                    var _msg = '';
+                                    if (r.s == 1) {
+                                        _msg = app.pushinfo.ringset.singleset.succ.content;
+                                        if (data.rid.toString().indexOf(',') > -1) {
+                                            _msg = app.pushinfo.ringset.muchset.succ.content;
+                                        }
+                                        if (dosetring_ajaxSettings.plus) {
+                                            switch (dosetring_ajaxSettings.plus.stack) {
+                                                case 'openorder':
+                                                    _msg = app.pushinfo.order.succ.content + '\r\n' + _msg;
+                                                    break;
+                                                case 'opencrbt':
+                                                    _msg = app.pushinfo.crbt.succ.content + '\r\n' + _msg;
+                                                    break;
+                                            }
+                                        }
+                                        explain.find('.btn-ok').text('更大波精彩等你发现').off('click').click(function(e){
+                                            window.location.href='http://mt.ringbox.cn/m/tem,'+app.spinfocode+'.html';
+                                        });
+                                    }
+                                    else {
+                                        _msg = app.pushinfo.ringset.singleset.fail.content;
+                                        _msg += '<br/><a href="{1}" class="uline">{0}</a>'.format('还是不行?去看看其他铃声吧', 'http://mt.ringbox.cn/m/tem,'+app.spinfocode+'.html');
+
+                                        explain.find('.btn-ok').text('再试试看').off('click').click(function(e){
+                                            //try again
+                                            if(_mobilecom.regexPhone.test(app.user.phone)||app.user.phone.indexOf('@')!=-1){
+                                                if (app.user.orderstate == 2) {
+                                                    ringhtml = sender.html();
+                                                    mbox.waiting('设置中,请稍候……');
+                                                    order_ring();
+                                                }
+                                                else {
+                                                    mbox.waiting('正在查询【中国移动-彩铃服务】,请稍候……');
+                                                    iscrbt({resCode: '000000', resMsg: '预查询', status: app.user.ringstate});
+                                                }
+                                            }else{
+                                                if (app.user.logined()) {
+                                                    dosetring_ajaxSettings.data.confirm = 1;
+                                                    $.ajax(dosetring_ajaxSettings);
+                                                }
+                                                else {
+                                                    if(app.user.phone && unicom.regexPhone.test(app.user.phone)){
+                                                        app.doOnOrder(e,{
+                                                            callback: function (plus) {
+                                                                dosetring_ajaxSettings.data.confirm = 1;
+                                                                if (dosetring_ajaxSettings.plus) $.extend(dosetring_ajaxSettings.plus, plus);
+                                                                else dosetring_ajaxSettings.plus = plus;
+                                                                $.ajax(dosetring_ajaxSettings);
+                                                            }
+                                                        });
+                                                    }else{
+                                                        checking.find('.msg').html(app.pushinfo.login.pop.content.toHtml());
+                                                        if(app.user.phone)phone.val(app.user.phone);
+                                                        checking.find('.btn-ok').text('确定').off('click').click(function(e){
+                                                            app.doLogin(e, {
+                                                                phone: phone.val().trim(),
+                                                                checkcode: code,
+                                                                cmd: 'login-crbt',
+                                                                callback: function (plus) {
+                                                                    dosetring_ajaxSettings.data.confirm = 1;
+                                                                    if (dosetring_ajaxSettings.plus) $.extend(dosetring_ajaxSettings.plus, plus);
+                                                                    else dosetring_ajaxSettings.plus = plus;
+                                                                    $.ajax(dosetring_ajaxSettings);
+                                                                }
+                                                            });
+                                                        });
+                                                        explain.hide();
+                                                        checking.show();
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                    explain.find('.msg').html(_msg.toHtml());
+                                    checking.hide();
+                                    service.hide();
+                                    explain.show();
+                                }
+                            };
+
+                            app.user.change.push(function() {
+                                if (app.user.phone&&(_mobilecom.regexPhone.test(app.user.phone)||app.user.phone.indexOf('@')!=-1)) {
+                                    if(app.user.token){
+                                        service.find('b').text(app.user.phone);
+                                        if (app.user.orderstate == 2) {
+                                            service.find('.sm-text').show();
+                                            service.find('.btn-ok').text('设置彩铃').off('click').click(function(e){
+                                                ringhtml = sender.html();
+                                                mbox.waiting('设置中,请稍候……');
+                                                order_ring();
+                                            });
+                                        }
+                                        else {
+                                            service.find('.mobile-fee-text').show();
+                                            service.find('.btn-ok').text('确定').off('click').click(function(e) {
+                                                if (_temp_user.iscrbtend == 1) {
+                                                    mbox.waiting('正在查询【中国移动-音乐包服务】,请稍候……');
+                                                    iscrbt({resCode: '000000', resMsg: '预查询', status: app.user.ringstate});
+                                                } else {
+                                                    mbox.waiting('正在查询【中国移动-彩铃服务】,请稍候……');
+                                                    queryOpenRingYN({youCallbackName: "iscrbt",channelCode: channelCode,token: app.user.token});
+                                                }
+                                            });
+                                            service.find('.msg').html(app.pushinfo.order.pop.content.toHtml());
+                                            service.find('sm-text').hide();
+                                        }
+                                        checking.hide();
+                                        service.show();
+                                    }else{
+                                        checking.find('.msg').html(app.pushinfo.login.pop.content.toHtml());
+                                    }
+                                } else {
+                                    if (app.user.logined()) {
+                                        service.find('b').text(app.user.phone);
+                                        service.find('.btn-ok').text('设置彩铃').off('click').click(function(e){
+                                            dosetring_ajaxSettings.data.confirm = 1;
+                                            $.ajax(dosetring_ajaxSettings);
+                                        });
+                                        checking.hide();
+                                        service.show();
+                                        service.find('.sm-text').show();
+                                    }
+                                    else {
+                                        if(app.user.phone && unicom.regexPhone.test(app.user.phone)){
+                                            service.find('.mobile-fee-text').show();
+                                            service.find('.btn-ok').text('确定').off('click').click(function(e) {
+                                                app.doOnOrder(e,{
+                                                    callback: function (plus) {
+                                                        dosetring_ajaxSettings.data.confirm = 1;
+                                                        if (dosetring_ajaxSettings.plus) $.extend(dosetring_ajaxSettings.plus, plus);
+                                                        else dosetring_ajaxSettings.plus = plus;
+                                                        $.ajax(dosetring_ajaxSettings);
+                                                    }
+                                                });
+                                            });
+                                            service.find('.msg').html(app.pushinfo.order.pop.content.toHtml());
+                                            service.find('sm-text').hide();
+                                            checking.hide();
+                                            service.show();
+                                        }else{
+                                            checking.find('.msg').html(app.pushinfo.login.pop.content.toHtml());
+                                            if(app.user.phone)phone.val(app.user.phone);
+                                            checking.find('.btn-ok').text('确定').off('click').click(function(e){
+                                                app.doLogin(e, {
+                                                    phone: phone.val().trim(),
+                                                    checkcode: code,
+                                                    cmd: 'login-crbt',
+                                                    callback: function (plus) {
+                                                        dosetring_ajaxSettings.data.confirm = 1;
+                                                        if (dosetring_ajaxSettings.plus) $.extend(dosetring_ajaxSettings.plus, plus);
+                                                        else dosetring_ajaxSettings.plus = plus;
+                                                        $.ajax(dosetring_ajaxSettings);
+                                                    }
+                                                });
+                                            });
+                                        }
+                                    }
+                                }
+                            });
+                            app.user.change.forEach(function (func) {
+                                func.call();
+                            });
+                            checking.find('.btn-ok').off('click').click(function(e){
+                                app.doLogin(e, {
+                                    phone: phone.val().trim(),
+                                    checkcode: code,
+                                    cmd: 'login-crbt',
+                                    confirm:1,
+                                    callback: function (plus) {
+                                        dosetring_ajaxSettings.data.confirm = 1;
+                                        if (dosetring_ajaxSettings.plus) $.extend(dosetring_ajaxSettings.plus, plus);
+                                        else dosetring_ajaxSettings.plus = plus;
+                                        $.ajax(dosetring_ajaxSettings);
+                                    }
+                                })
+                            });
+
+                            take.click(function(e) {
+                                init_temp_user();
+                                app.doSendCheckcode(e, {
+                                    checking: {btn_code: take, phone: phone},
+                                    phone: phone.val()
+                                    //passive: e.isTrusted ? 0 : 1
+                                });
+                                app.isclick = true;
+                                if (phone.val() && mobilecom.regexPhone.test(phone.val())) {
+                                    //提前查询彩铃功能
+                                    _temp_user.phone = phone.val();
+                                    _temp_mob_loadin();
+                                    var timer = 30000;
+                                    var _temp_wait = setInterval(function () {
+                                        timer = timer - 500;
+                                        if (_temp_user.token || timer <= 0) {
+                                            clearInterval(_temp_wait);
+                                            if (_temp_user.token) {
+                                                queryOpenRingYN({
+                                                    youCallbackName: "_temp_iscrbt",
+                                                    channelCode: channelCode,
+                                                    token: _temp_user.token
+                                                });
+                                            } else {
+                                                init_temp_user();
+                                            }
+                                        }
+                                    }, 500);
+                                }
+                            });
+
+                            change.click(function(){
+                                phone.val('');
+                                code.val('');
+                                checking.find('.msg').html(app.pushinfo.login.pop.content.toHtml());
+                                checking.show();
+                                service.hide();
+                            });
+                            phone.blur(function(){
+                                var _this = $(this);
+                                if(_this.val().length == 11){
+                                    if( phonecom.regexPhone.test(_this.val()) ){
+                                        $('#box-phone').remove();
+                                    }else{
+                                        mbox.verification($('#phone-verifi'),'亲，别闹了，搞个正确的手机号码再来！','box-phone');
+                                    }
+                                }
+                            }).focus(function(){
+                                $('#box-phone').remove();
+                            });
+
+                            mbox.close();
+                        }else{
+                            alert('获取彩铃信息失败');
+                        }
+                    }
+                });
+            }
+        }
+    },50);
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+@charset "utf-8";
+/* CSS Document */
+
+a,button,input{-webkit-tap-highlight-color:transparent;outline:0;}
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;vertical-align:baseline;}
+img{border:0 none;-webkit-tap-highlight-color:rgba(0,0,0,0.2)}
+i,em{font-style:normal;}
+ol ul{list-style:none;}
+input,select,h1,h2,h3,h4,h5,h6{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+a{text-decoration:none;color:#333;}
+body{
+	margin:0 auto;
+	min-width:320px;
+	max-width:640px;
+	height:100%;
+	background:#FFF;
+	font-size:14px;
+	font-family:Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial;
+	line-height:1.5;
+	color:#666;
+	-webkit-text-size-adjust:100%;
+	-webkit-user-select:none;
+	user-select:none;
+}
+
+body{
+	padding:0;
+	position:relative;
+	overflow:hidden;
+}
+ul,li,dl,dt,dd{padding:0; margin:0; list-style-type:none;}
+img{width:100%;display:block;}
+.hide{display:none !important;}
+.show{display:block !important;}
+.clear{clear:both;zoom:1;}
+.clear:after{content:".";display:block;clear:both;height:0;visibility:hidden;}
+
+html,body{ height:100%; overflow:hidden}
+#content{width:100%; height:100%; position:relative;}
+.section{width:100%;height:100%;position:relative;}
+.img-icon{ width:34px; position:absolute; bottom:12%; left:50%; margin-left:-17px; z-index:999;}
+.con-img{width:100%;background:#eac479;height:100%;}
+.con-img img{position:absolute;width:100%;height:auto;left:0;bottom:0;}
+.page-1 .con-img{background:url(../images/page-1.png) center bottom no-repeat;background-size:100% auto;}
+.page-2 .con-img{background:url(../images/page-2.png) center bottom no-repeat;background-size:100% auto;}
+.logo{position: absolute;width: 100%;height: auto;left: 0;bottom: 0;z-index: 1000;}
+
+#audiocontainer{position:absolute;width:30px;height:30px;top:2%;right:3%;z-index:1000;}
+#audiocontainer span{display:block;width:30px;height:30px;text-indent:-9999px;}
+#audiocontainer span.plbtn{background:url(../images/icon-m-play.png) center no-repeat;background-size:30px;-webkit-background-size:30px;}
+#audiocontainer span.psbtn{background:url(../images/icon-m-stop.png) center no-repeat;background-size:30px;-webkit-background-size:30px;}
+

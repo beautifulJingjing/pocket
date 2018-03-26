@@ -1,0 +1,35 @@
+<%- include include/index/head-index.ejs %>
+<style>
+    #view{padding-top: 2.25rem;}
+</style>
+<div class="main">
+    <div class="zt-pic"></div>
+    <div class="recbox">
+        <div class="flmusic"></div>
+        <div class="loadmore hide"><div class="loadmore-inner"><i class="icon-font iconfont-load"></i><span>点击加载更多</span></div></div>
+    </div>
+</div>
+<div id="ring-template" class="hide">
+    <div class="musics clear">
+        <div class="left-area">
+            <em>{0}</em>
+            <a href="javascript:void(0);" data-rid="{3}" data-sprid="{5}" class="controlbtn btn-play">暂停/播放</a>
+        </div>
+        <div class="pinfo">
+            <div class="fr set">
+                <a href="javascript:void(0);" data-rid="{3}" data-flag="{4}" data-sprid="{5}" class="icon-font icon-color iconfont-ringSet btn-setring"></a>
+                <a href="javascript:void(0);" data-rid="{3}" data-rname="{1}"  class="icon-font icon-color iconfont-ringDown btn-download"></a>
+            </div>
+            <div>
+                <a href="javascript:void(0);" class="btn-play">
+                    <p class="name">{1}</p>
+                    <p class="lh"><i class="icon-font icon-color iconfont-vip vip"></i><span>{2}</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var _partlist_wait=setInterval(function(){if(diring_index_state){clearInterval(_partlist_wait);var ope=$('.flmusic'),more=$('.loadmore');var records=20;function load_list(){var data={cmd:'get-ringlist',pid:$.request('id'),spinfocode:app.spinfocode,start:ope.children().length,records:records};$.ajax({url:"/proxy/v3/proxy.ahtml",data:data,dataType:'json',cache:true,type:'get',beforeSend:function(){mbox.waiting('加载中，请稍候……')},success:function(r){if(r.s==1){var template=$('#ring-template').html();for(var i in r.data.list){var d=r.data.list[i];var li=$(template.format(parseInt(i)+data.start+1,d.name,d.songer,d.ringid,d.coprinfo.cflag,d.springid)).data('coprinfo',d.coprinfo);if(d.isnew=='1')li.find('.vip').before('<i class="new">新</i>');if(d.ishot=='1')li.find('.vip').before('<i class="hot">热</i>');if(app.spinfocode=='00000350311'||app.spinfocode=='00000350312'){li.find('.btn-download').hide()};li.find('.btn-play').click(app.doPlay);li.find('.btn-download').click(app.doDownload);if(app.pushinfo.ringset.serve==3&&d.coprinfo.type=='99')li.find('.btn-setring').addClass('gray');else li.find('.btn-setring').click(app.doSetRing);ope.append(li)};if(data.records>r.data.list.length)more.hide();else more.show()}},complete:function(){mbox.close()}})};load_list();more.click(load_list)}},50);
+</script>
+<%- include include/foot.ejs %>

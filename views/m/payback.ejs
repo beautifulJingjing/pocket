@@ -1,0 +1,331 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/m/stylesheets/pay.css">
+    <style type="text/css">
+        #slid-layer-1{display: block;left: 0}
+        #slid-layer-1 .musics a.btn-play {background: url(/m/images/btn-play-red-1.png) left center no-repeat;background-size: 1.5rem auto;-webkit-background-size: 1.5rem auto;-moz-background-size: 1.5rem auto;-o-background-size: 1.5rem auto;}
+        #slid-layer-1 .musics a.btn-pause {background: url(/m/images/btn-pause-red-1.gif) left center no-repeat;background-size: 1.46rem auto;-webkit-background-size: 1.46rem auto;-moz-background-size: 1.46rem auto;-o-background-size: 1.46rem auto;}
+        #slid-layer-1 .privilege-list p{border-bottom: 0;padding: 0}
+        .sm-text{margin-top: 1.5rem;}
+        .sm-text em{background: #fff;}
+    </style>
+    <script src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript">
+        var temp_spinfocode = '<%- spinfocode %>';
+        var temp_isclick = <%- isclick %>;
+        var temp_config = <%- config %>;
+    </script>
+</head>
+<body>
+<script>
+    //控制页面自适应
+    var _winW = document.body.clientWidth || window.screen.width;
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+
+    var migu_state=true,open_migu_sdk_state=true,wx_sdk_state=false,diring_index_state=false,mobile_state=true,m2_m_state=true,init_state=true,wx_init_state=false,payment_state=false;
+
+    function creatScript(url,state){
+        var head= document.getElementsByTagName('head')[0];
+        var _js= document.createElement('script');
+        _js.type= 'text/javascript';
+        _js.title=state;
+        _js.onload = _js.onreadystatechange = function() {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                eval(_js.title+'=true');
+                _js.onload = _js.onreadystatechange = null;
+            }
+        };
+        _js.src= url;
+        head.appendChild(_js);
+    }
+
+    //creatScript('http://m.12530.com/order/pub-ui/js/and/migu.js','migu_state');
+    //creatScript('http://m.12530.com/order/pub-ui/js/and/openMusicSDK.js','open_migu_sdk_state');
+    creatScript('/m/scripts/diring-index.js','diring_index_state');
+    creatScript('/m/scripts/payment.js','payment_state');
+
+    /*var _mobile_wait = setInterval(function () {
+        if(diring_index_state ) {
+            mbox.waiting('页面加载中,请稍等片刻……');
+            clearInterval(_mobile_wait);
+            mobile_state = creatScript('/m/scripts/mobile_m.js','mobile_state');
+            m2_m_state = creatScript('/m/scripts/m2_m.js','m2_m_state');
+        }
+    }, 200);*/
+
+    //webjs初始化
+    var _head_wait = setInterval(function () {
+        if((migu_state && open_migu_sdk_state && diring_index_state && payment_state)) {
+            clearInterval(_head_wait);
+            //openMiGuInit("002100B");
+            init_state=true;
+        }
+    }, 200);
+
+</script>
+<div id="slid-layer-1" class="slid-layer">
+    <div class="t">
+        <span>温馨提示</span>
+        <div class="icon-font iconfont-back btn-back"></div>
+    </div>
+    <div class="musics clear" style="display: none"></div>
+    <!--<div class="member-tip">-->
+        <!--<em></em>-->
+        <!--<div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>加入VIP会员，畅享彩铃无限量更换<i>(0元/首)</i></div>-->
+    <!--</div>-->
+    <div class="c">
+        <div class="checking" style="display: none;">
+            <p class="clear" id="phone-verifi">
+                <input type="tel" placeholder="请输入手机号" class="phone" maxlength="11">
+            </p>
+            <p class="clear" id="code-verifi">
+                <input type="tel" placeholder="6位短信验证码" class="code" maxlength="6"><a href="javascript:;" class="btn-code">获取短信验证码</a>
+            </p>
+            <!--下载登录成功提示-->
+            <div class="down-tip"></div>
+            <button class="btn-ok">确定</button>
+            <div class="msg"></div>
+        </div>
+        <div class="service">
+            <div class="service-box" style="padding-left: 0">
+                <div style="padding: 0 .5rem .5rem;border-bottom: .2rem solid #e7e7e7;position: relative">
+                    <img src="/m/images/img-user.png" style="left: .5rem;">
+                    <div style="position: relative;padding-left: 2.75rem">
+                        <p class="clear num-p"><span><b></b>，您好！</span><a href="javascript:;" class="btn-change">更换手机号</a></p>
+                        <p class="confirm setting-update">是否确认设置该首彩铃？<br>资费是：<span class="bz-span">2.0元<em></em></span>（<i>VIP专享0元/首</i>）</p>
+                    </div>
+                </div>
+                <div class="mobile-fee-text" style="display: none;"><span></span>设置该首彩铃需升级为VIP会员，是否确认升级并设置该首彩铃？</div>
+                <div class="mobile-crbt clear"></div>
+                <div class="mobile-order clear"></div>
+            </div>
+            <div class="pay-box">
+                <div class="clear">
+                    <div class="pay-btn-header">
+                        <p class="fl">VIP会员服务</p>
+                        <p class="fr">28元/6个月</p>
+                    </div>
+                    <div class="pay-tab">
+                        <div class="pay-WeChat pay-tab-list">
+                            <img class="pay-icon" src="/m/images/pay-weixin.png">
+                            <div class="pay-content">
+                                <p>微信支付</p>
+                                <span>推荐安装微信5.0以上版本的用户使用</span>
+                            </div>
+                            <img class="radio-img" src="/m/images/pay-radio-unchecked.png">
+                        </div>
+                        <div class="pay-Alipay pay-tab-list">
+                            <img class="pay-icon" src="/m/images/pay-ali.png">
+                            <div class="pay-content" style="border-top: 1px solid #e7e7e7;">
+                                <p>支付宝支付</p>
+                                <span>推荐有支付宝账号的用户使用</span>
+                            </div>
+                            <img class="radio-img" src="/m/images/pay-radio-unchecked.png">
+                        </div>
+                        <!--<div class="pay-QrCode pay-tab-list">
+                            <img class="pay-icon" src="/m/images/pay-three.png">
+                            <div class="pay-content" style="border-top: 1px solid #e7e7e7;">
+                                <p>微信扫码支付</p>
+                                <span>推荐安卓的用户使用</span>
+                            </div>
+                            <img class="radio-img" src="/m/images/pay-radio-unchecked.png">
+                        </div>-->
+                        <div class="pay-btn">
+                            <button>立即支付</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="pay-privilege">
+                    <div class="pay-member-tip">
+                        <em></em>
+                        <div class="member-tip-inner"><span class="icon-font iconfont-queen"></span>VIP会员特权</div>
+                    </div>
+                    <ul class="privilege-list clear" style="margin-top: 0 "><li><span class="icon-01"></span><h4>尊贵VIP标识</h4> <p>酷炫图标，彰显土豪身份</p> </li> <li> <span class="icon-02"></span><h4>高清铃声免费试听</h4><p>2,000,000首任你听</p></li><li><span class="icon-03"></span> <h4>高清彩铃免费更换</h4><p>2,000,000首无限更换</p></li><li><span class="icon-04"></span><h4>高清振铃免费下载</h4><p>2,000,000首无限下载</p></li><li><span class="icon-05"></span><h4>VIP免费抽奖特权</h4><p>话费/流量等奖品免费拿</p></li><li><span class="icon-06"></span><h4>VIP免广告特权</h4><p>让你安静享受音乐</p></li></ul>
+                </div>
+            </div>
+        </div>
+        <div class="explain" style="display: none;">
+            <div class="explain-box">
+                <img src="/m/images/img-user.png">
+                <div class="msg"></div>
+            </div>
+            <button class="btn-ok"></button>
+        </div>
+    </div>
+</div>
+<div id="pop-waiting-layer">
+    <div class="anim">
+        <div class="cube1"></div>
+        <div class="cube2"></div>
+    </div>
+    <span>加载中，请稍后……</span>
+</div>
+<div id="pop-state" class="pop-state">
+    <div class="pay-tit">请在微信内完成付款</div>
+    <div class="pay-state">已完成付款</div>
+    <div class="opt-cancel">取消</div>
+</div>
+<div id="pop-msg-layer" class="tcdiv">
+    <div class="tctit"><span id="title"></span><em onclick="mbox.close()">关闭</em></div>
+    <div class="tccon">
+        <div class="wzcon font-15">
+            <p id="explain"></p>
+        </div>
+        <div class="ipbtn">
+            <p class="clear">
+                <button id="btn-left" class="graybtn"></button>
+                <button id="btn-right" class="colorbtn"></button>
+            </p>
+            <button id="btn-enter" class="onlybtns"></button>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/trace.js"></script>
+<script>
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
+    }
+    var ringid,plat,pro,orderidD;
+    var _root = window.location.host;
+    //更新session信息
+    var update_session = function(data){
+        $.ajax({
+            url: "/proxy/v3/comkey.aspx",
+            data: data,
+            dataType: 'json',
+            cache: false,
+            type: 'get',
+            success: function (r) {
+                $.extend(app.user, r);
+            }
+        });
+    };
+    var _pay_wait = setInterval(function () {
+        if ((diring_index_state && mobile_state && init_state && m2_m_state)){
+            clearInterval(_pay_wait);
+            plat = getQueryString('plat');
+            pro = getQueryString('pro');
+            orderidD = getQueryString('orderidD');
+
+            if(orderidD){
+                $.extend(app.user, {'orderidD':true});
+                update_session({orderidD: true});
+            }
+
+            if(plat ==1) plat = '支付宝';
+            else plat = '微信';
+            app.user.change.push(function() {
+                if(app.user.logined()){
+                    service.find('b').text(app.user.phone);
+                }
+            });
+            app.user.change.forEach(function (func) {
+                func.call();
+            });
+            var _proLi = $('.pay-tab-list');
+//            _proLi.each(function(){
+//                if($(this).data('protag') == pro){
+//                    $(this).addClass('pay-checked').siblings().removeClass('pay-checked');
+//                }
+//            });
+            $('.btn-back').click(function(){
+                window.location.href = 'https://'+_root+'/m/tem,'+app.spinfocode+'.html';
+            })
+            $.ajax({
+                url: "/proxy/v3/proxy.aspx",
+                data: {
+                    cmd: "get-receivenum",
+                    spinfocode: app.spinfocode,
+                    modeltype: '1'
+                },
+                dataType: 'json',
+                cache: false,
+                type: 'get',
+                success: function (r) {
+                    if (r.s == 1) service.find('.pay-get-num').html('已有<em>' + r.data + '</em>位用户升级了VIP会员');
+                }
+            });
+            mbox.alertState('请在'+plat+'内完成付款');
+
+
+            $('.pay-tab-list .radio-img').eq(getQueryString('item')).attr('src','/m/images/pay-radio-checked.png');
+            _proLi.click(function(){
+//                $(this).addClass('pay-checked').siblings().removeClass('pay-checked');
+//                var _payPro = $('.pay-checked');
+//                var _payProName = _payPro.find('.pay-name').text();   //选中的要支付的产品名称
+//                var _payProPrice = _payPro.find('.pay-price').text(); //选中的要支付的产品价格
+                var _payProName = '28元/6个月';
+                var _payProPrice = '28元';
+//                var _proTag = _payPro.data('protag');          //产品代码
+                var _proTag = "5";
+                var _plat;  //支付方式
+                var _ringid = $('#slid-layer').find('.controlbtn').data('rid'),_returnUrl; //回调url
+                var rooturl = window.location.host;
+                if(_ringid) _returnUrl = app.spinfocode+'.html?ringid='+_ringid+'&pro='+_proTag+'&orderidD=true';
+                else _returnUrl = app.spinfocode+'.html?pro='+_proTag+'&orderidD=true';
+                app.log({name: 'checkedProPrice',params: {checkedPro:_payProPrice}});
+
+                $('.pay-tab-list .radio-img').attr('src','/m/images/pay-radio-unchecked.png');
+                $(this).find('.radio-img').attr('src','/m/images/pay-radio-checked.png');
+
+                var index = $('.pay-tab-list').index(this);
+                switch(index){
+                    case 0:
+                        $('.pay-btn').off('click').on('click', function (e) {
+                            e.stopPropagation();
+                            //微信支付执行代码
+                            _plat = 2;
+                            returnUrl = 'https://'+rooturl+'/m/payback,'+ _returnUrl + '&plat='+_plat + '&item=0';
+//                            returnUrl = 'https//'+rooturl+'/m/payback,'+ _returnUrl + '&plat='+_plat + '&item=0';
+                            setTimeout(function(){mbox.alertState('请在微信内完成付款');},3500);
+                            app.generateorder({goodsid:_proTag,paytype:7,objtype:3,objID:app.user.phone,returnUrl:returnUrl});
+                            app.log({name: 'payWeChat'});
+
+                        });
+                        break;
+                    case 1:
+                        $('.pay-btn').off('click').on('click', function (e) {
+                            e.stopPropagation();
+                            //支付宝支付执行代码
+                            _plat = 1;
+                            returnUrl = 'https://'+rooturl+'/m/payback,'+_returnUrl + '&plat='+_plat + '&item=1';
+//                            returnUrl = 'http://'+rooturl+'/m/payback,'+_returnUrl + '&plat='+_plat + '&item=1';
+                            setTimeout(function(){mbox.alertState('请在支付宝内完成付款');},3500);
+                            app.generateorder({goodsid:_proTag,paytype:6,objtype:3,objID:app.user.phone,returnUrl:returnUrl});
+                            app.log({name: 'payAlipay'});
+                        });
+                        break;
+                    case 2:
+                        $('.pay-btn').off('click').on('click', function (e) {
+                            e.stopPropagation();
+                            //微信扫码执行代码
+                            returnUrl = 'https://mt.ringbox.cn/m/paycode,'+_returnUrl + '&item=2';
+//                            returnUrl = 'http://mt.ringbox.cn/m/paycode,'+_returnUrl + '&item=2';
+                            app.generateorder({goodsid:_proTag,paytype:8,objtype:3,objID:app.user.phone,returnUrl:returnUrl});
+                            app.log({name: 'payWeChatQrcode'});
+                        });
+                        break;
+                }
+            });
+        }
+    },50);
+</script>
+</body>
+</html>

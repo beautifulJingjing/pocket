@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title><%= title %></title>
+    <script src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript">
+
+        var temp_spinfocode = '<%- spinfocode %>';
+        var temp_isclick = <%- isclick %>;
+        var temp_config = <%- config %>;
+
+    </script>
+</head>
+<body>
+<script>
+
+    var migu_state=false,open_migu_sdk_state=false,diring_index_state=false,mobile_state=false,init_state=false;
+
+    function creatScript(url,state){
+        var head= document.getElementsByTagName('head')[0];
+        var _js= document.createElement('script');
+        _js.type= 'text/javascript';
+        _js.title=state;
+        _js.onload = _js.onreadystatechange = function() {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                eval(_js.title+'=true');
+                _js.onload = _js.onreadystatechange = null;
+            }
+        };
+        _js.src= url;
+        head.appendChild(_js);
+    }
+
+    creatScript('http://m.12530.com/order/pub-ui/js/and/migu.js','migu_state');
+    creatScript('http://m.12530.com/order/pub-ui/js/and/openMusicSDK.js','open_migu_sdk_state');
+    creatScript('/m/scripts/diring-index_m.js','diring_index_state');
+
+    //webjs初始化
+    var _head_wait = setInterval(function () {
+        if((migu_state && open_migu_sdk_state && diring_index_state)) {
+            clearInterval(_head_wait);
+
+            openMiGuInit("002100B");
+            init_state=true;
+        }
+    }, 200);
+
+    var is_openserve=false;
+    var is_setring=false;//是否有需要设置的铃音，存放铃音ID
+    var is_second=false;//是否经过二次确认
+    var crbtstate=false;
+    var orderlogin=false;
+    var isUserCenter=false;
+    var channelCode='002100B';
+    var serviceId='600927020000006638';
+    var sre='37ef259ccf3e42149f976350079f7f5b';
+    var ringhtml='';
+    var is_mobile_edition=false;//是否移动专版
+    var that;
+
+    //通知接口
+    function notifiy_state(state){
+        obj.notifiy_state(state);
+    }
+
+    //登录接口
+    function toPay(phone) {
+        var _usercenter_wait = setInterval(function () {
+            if(init_state) {
+                clearInterval(_usercenter_wait);
+                if (app.user.token) {
+                    queryOpenRingYN({
+                        youCallbackName :"iscrbt",
+                        channelCode :channelCode,
+                        token:app.user.token
+                    });
+                } else {
+                    var data = {
+                        youCallbackName: "call_load",
+                        channelCode: channelCode,
+                        loginType: "3",
+                        callBackUrl: '',
+                        miguToken: "",
+                        key: sre,
+                        msisdn: phone || app.user.phone
+                    };
+                    loginType(data);
+                }
+            }
+        }, 200);
+    }
+    function call_load(result){
+        if(result.resCode&&result.resCode=='000000'){
+            update_session({token:result.token});
+            app.user.token=result.token;
+            queryOpenRingYN({
+                youCallbackName :"iscrbt",
+                channelCode :channelCode,
+                token:app.user.token
+            });
+        }else if(result.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+result.resMsg+'"}');
+        }
+    }
+
+    //彩铃功能查询回调
+    function iscrbt(r) {
+        if(r.resCode=='000000'){
+            if(r.status==0){
+                queryStrategyBYB({
+                    youCallbackName :"crbt_policy",
+                    channelCode :channelCode,
+                    token:app.user.token,
+                    serviceId:"",
+                    count:"1",
+                    type:"4"
+                })
+            }else if(r.status==1) {
+                if(r.resMsg!='预查询')update_session({ringstate:1});
+                app.user.ringstate=1;
+                crbtstate=1;
+                queryMonthRingYN({
+                    youCallbackName :"isorder",
+                    channelCode :channelCode,
+                    token:app.user.token,
+                    serviceId:serviceId
+                })
+            }
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+
+    //彩铃开通策略回调
+    function crbt_policy(r) {
+        if(r.resCode=='000000') {
+            openRingTone({
+                youCallbackName :"open_crbt",
+                channelCode :channelCode,
+                token:app.user.token,
+                cpId:r.bizInfoMon.cpId,
+                bizCode:r.bizInfoMon.bizCode,
+                cpparam:r.bizInfoMon.cpparam,
+                salePrice:r.bizInfoMon.salePrice,
+                name:"openRingTone"
+            });
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+
+    //开通彩铃回调
+    function open_crbt(r) {
+        if(r.resCode=='000000'||r.resCode=='H000001'||r.resCode=='H000002'||r.resCode=='H301034'||r.resCode=='H1'||r.resCode=='H2') {
+            update_session({ringstate:1});
+            app.user.ringstate=1;
+            queryMonthRingYN({
+                youCallbackName: "isorder",
+                channelCode: channelCode,
+                token: app.user.token,
+                serviceId: serviceId
+            })
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+
+    //查询是否包月回调
+    function isorder(r) {
+        if(r.resCode=='000000') {
+            if (r.status == 0) {
+                queryStrategyBYB({
+                    youCallbackName: "order_policy",
+                    channelCode: channelCode,
+                    token: app.user.token,
+                    serviceId: serviceId,
+                    count: "1",
+                    type: ""
+                })
+            } else if (r.status == 1) {
+                orderreport(1);//订购用户通知
+                update_session({orderstate:2});
+                app.user.orderstate=2;
+                notifiy_state('{"code":1,"msg":"已经是订购用户"}');
+            }
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+    //包月包策略回调
+    function order_policy(r) {
+        if(r.resCode=='000000'){
+            orderMonthRing({
+                youCallbackName :"open_order",
+                channelCode :channelCode,
+                token:app.user.token,
+                serviceId:serviceId,
+                cpId:r.bizInfoMon.cpId,
+                bizCode:r.bizInfoMon.bizCode,
+                cpparam:r.bizInfoMon.cpparam,
+                salePrice:r.bizInfoMon.salePrice,
+                name:"orderMonthRing"
+            })
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+    //订购彩铃包月回调
+    function open_order(r) {
+        if(r.resCode=='000000'||r.resCode=='H2000'){
+            orderreport(1);//订购用户通知
+            update_session({orderstate:2,smsconfirm:0});
+            orderlogin = true;
+            app.user.orderstate=2;
+            app.user.smsconfirm=0;
+            notifiy_state('{"code":1,"msg":"订购成功"}');
+        }else if(r.resCode=='999009'){
+            cancel_token();
+            notifiy_state('{"code":0,"msg":"token失效，请重新登录"}');
+        }else{
+            stateInit();
+            notifiy_state('{"code":0,"msg":"'+r.resMsg+'"}');
+        }
+    }
+
+    //通知订购用户信息
+    var orderreport = function(type){
+        var data = {
+            cmd: 'open_orderreport',
+            spinfocode: app.spinfocode,
+            orderid: serviceId,
+            type:type
+        };
+        $.ajax({
+            url: "/proxy/v3/proxy.aspx",
+            data: data,
+            dataType: 'json',
+            cache: false,
+            type: 'post',
+            success: function (r) {
+                //alert(r.toString());
+            }
+        });
+    };
+    //更新session信息
+    var update_session = function(data){
+        $.ajax({
+            url: "/proxy/v3/comkey.aspx",
+            data: data,
+            dataType: 'json',
+            cache: false,
+            type: 'get',
+            success: function (r) {
+                $.extend(app.user, r);
+            }
+        });
+    };
+    //状态初始化
+    function stateInit(){
+        is_setring=false;
+        is_openserve=false;
+        orderlogin=false;
+        isUserCenter=false;
+    }
+    toPay('15268108132');
+</script>
+</body>
+</html>

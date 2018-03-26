@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <!--<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">-->
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title>会员订购</title>
+    <style type="text/css">
+        *{margin: 0}
+        .content-show{font-size: 20px;font-family: "Microsoft yahei";padding: 20px;}
+    </style>
+    <script type="text/javascript" src="/javascripts/zepto.min.js"></script>
+    <script type="text/javascript" src="http://m.12530.com/order/pub-ui/js/and/migu.js"></script>
+    <script type="text/javascript" src="http://m.12530.com/order/pub-ui/js/and/openMusicSDK.js"></script>
+</head>
+<body>
+<script>
+    //百度统计
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?6ed1abfbbcac76121225032b8979fe19";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+
+    openMiGuInit("002100B");
+    var temp_spinfocode = '0';
+
+    var channelCode = '002100B',serviceId='600927020000006638',sre='37ef259ccf3e42149f976350079f7f5b',crbtstate=false;
+    var user = {
+        phone: '',
+        token: '',
+        ringstate: 0,
+        orderstate: 4,
+        smsconfirm: 0,
+        orderendtime: ''
+    };
+    //获取地址栏中的参数值
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    //获取用户手机号
+    user.phone = getQueryString('p');
+    //日志记录
+    function log(option) {
+        $.ajax({
+            url: "/proxy/v3/log.aspx",
+            data: {
+                spinfocode: temp_spinfocode,
+                type: option.type || 'event',
+                name: option.name,
+                params: JSON.stringify(option.params),
+                network: navigator.connection || {type: ''},
+                referer: option.referer || location.pathname,
+                msg: option.msg || ''
+            },
+            dataType: 'json',
+            cache: false,
+            type: 'get'
+        });
+    }
+    //仅限13588809885手机号码
+    if(user.phone=='13588809885'){
+        //登录接口
+        function mob_loadin(phone){
+            log({name: 'mob_loadin',type:'Interface',params: {phone:phone || user.phone}});
+            var data ={
+                youCallbackName :"call_load",
+                channelCode:channelCode,
+                loginType :"3",
+                callBackUrl:'',
+                miguToken:"",
+                key:sre,
+                msisdn: phone || user.phone
+            };
+            loginType(data);
+        }
+        //登录回调
+        function call_load(result){
+            if(result.resCode && result.resCode=='000000'){
+                log({name: 'call_load',type:'Interface',params: {phone:user.phone},msg:JSON.stringify(result)});
+                update_session({token:result.token});
+                user.token = result.token;
+                log({name: 'mobile_b_order',type:'Interface',params: 'userphone='+user.phone});
+                log({name:'queryMonthRingYN',type:'Interface',params:{phone:user.phone}});
+                queryMonthRingYN({
+                    youCallbackName: "isorder",
+                    channelCode: channelCode,
+                    token: user.token,
+                    serviceId: serviceId
+                })
+            } else if(result.resCode=='999009'){
+                log({name: 'call_load',type:'error',params: {phone:user.phone},msg:JSON.stringify(result)});
+            }else {
+                log({name: 'call_load', type: 'error', params: {phone: user.phone}, msg: JSON.stringify(result)});
+            }
+        }
+        setTimeout(function(){mob_loadin(user.phone);},500);
+
+        //查询是否包月回调
+        function isorder(r) {
+            if(r.resCode=='000000') {
+                log({name:'isorder',type:'Interface',params:{phone:user.phone},msg:JSON.stringify(r)});
+                if (r.status == 0) {
+                    if(user.smsconfirm==1){
+                        //$('.content-show').html('【中国移动-音乐包服务】需回复短信确认，才可生效。请根据短信提示进行操作。');
+                        $('body').append('<div class="content-show">【中国移动-音乐包服务】需回复短信确认，才可生效。请根据短信提示进行操作。</div>');
+                    }else{
+                        log({name:'isorder-queryStrategyBYB',type:'Interface',params:{phone:user.phone}});
+                        queryStrategyBYB({
+                            youCallbackName: "order_policy",
+                            channelCode: channelCode,
+                            token: user.token,
+                            serviceId: serviceId,
+                            count: "1",
+                            type: ""
+                        })
+                    }
+                } else if (r.status == 1) {
+                    orderreport(1);//订购用户通知
+                    update_session({orderstate:2});
+                    user.orderstate=2;
+                    //$('.content-show').html('会员登录成功');
+                    $('body').append('<div class="content-show">会员登录成功</div>');
+                }
+            }else if(r.resCode=='999009'){
+                log({name:'isorder',type:'error',params:{phone:user.phone},msg:JSON.stringify(r)});
+                cancel_token();
+            }else {
+                log({name:'isorder',type:'error',params:{phone:user.phone},msg:JSON.stringify(r)});
+                //$('.content-show').html(r.resCode+r.resMsg);
+                $('body').append('<div class="content-show">'+r.resCode+r.resMsg+'</div>');
+                //stateInit();
+            }
+        }
+        //包月包策略回调
+        function order_policy(r) {
+            if(r.resCode=='000000'){
+                log({name:'order_policy_call',type:'Interface',params:{phone:user.phone},msg:r.resMsg+ r.resCode});
+                log({name:'order_policy-orderMonthRing',type:'Interface',params:{phone:user.phone}});
+                orderMonthRing({
+                    youCallbackName :"open_order",
+                    channelCode :channelCode,
+                    token:user.token,
+                    serviceId:serviceId,
+                    cpId:r.bizInfoMon.cpId,
+                    bizCode:r.bizInfoMon.bizCode,
+                    cpparam:r.bizInfoMon.cpparam,
+                    salePrice:r.bizInfoMon.salePrice,
+                    name:"orderMonthRing"
+                })
+            }else if(r.resCode=='999009'){
+                log({name:'order_policy',type:'error',params:{phone:user.phone,token:user.token},msg:r.resMsg+ r.resCode});
+                cancel_token();
+            }else {
+                log({name:'order_policy',type:'error',params:{phone:user.phone},msg:r.resMsg+ r.resCode});
+                //$('.content-show').html(r.resCode+r.resMsg);
+                $('body').append('<div class="content-show">'+r.resCode+r.resMsg+'</div>');
+                //stateInit();
+            }
+        }
+        //订购彩铃包月回调
+        function open_order(r) {
+            if(r.resCode=='000000'||r.resCode=='H2000'){
+                orderreport(1);//订购用户通知
+                log({name: 'open_ringset_order',type:'Interface',params:'userphone='+user.phone+'&',msg:JSON.stringify(r)});
+                update_session({orderstate:2,smsconfirm:0});
+                user.orderstate=2;
+                user.smsconfirm=0;
+                //$('.content-show').html(r.resCode+r.resMsg);
+                $('body').append('<div class="content-show">'+r.resCode+r.resMsg+'</div>');
+
+            }else if(r.resCode=='044001'){
+                log({name:'open_ringset_order',type:'error',params:'userphone='+user.phone+'&',msg:r.resMsg+ r.resCode});
+
+            }else if(r.resCode=='999009'){
+                log({name:'open_ringset_order',type:'error',params:'userphone='+user.phone+'&',msg:r.resMsg+ r.resCode});
+                cancel_token();
+            }else if(r.resCode=='H1000'){
+                //...需要短信二次确认
+                update_session({smsconfirm:1});
+                user.smsconfirm=1;
+                log({name:'open_ringset_order',type:'error',params:'userphone='+user.phone,msg:r.resMsg+ r.resCode});
+                $('body').append('<div class="content-show">为保护用户权益，避免误操作。【中国移动-音乐包服务】需回复短信确认，才可生效。请根据短信提示进行操作。回复开通后即可0元畅享百万铃声。</div>');
+                //$('.content-show').html('为保护用户权益，避免误操作。【中国移动-音乐包服务】需回复短信确认，才可生效。请根据短信提示进行操作。回复开通后即可0元畅享百万铃声。');
+            }else{
+                var msg=r.resCode+r.resMsg;
+                if(r.resCode=='H4999'||r.resCode=='G1100'||r.resCode=='H4004'||r.resCode=='H3000')msg = '订购失败，暂时无法提供服务';
+                //$('.content-show').html(msg);
+                $('body').append('<div class="content-show">'+msg+'</div>');
+                log({name: 'open_ringset_order',type:'error',params: 'userphone='+user.phone+'&',msg:msg});
+                //stateInit();
+            }
+        }
+
+        //清除token以及session信息
+        var cancel_token = function(){
+            $.ajax({
+                url: "/proxy/v3/comkey.aspx",
+                data: {
+                    cancel: true
+                },
+                dataType: 'json',
+                cache: false,
+                type: 'get',
+                success: function (r) {
+                    user = {
+                        token:'',
+                        //用户会员判断
+                        isorder: function () {
+                            if (typeof this.orderstate == 'number') return this.orderstate != 4;
+                            else return false;
+                        },
+                        logined: function () {
+                            if (typeof this.phone != 'string' || this.phone == '' || typeof this.id != 'string' || this.id == '')
+                                return false;
+                            else if (!phonecom.regexPhone.test(this.phone))
+                                return this.isorder();
+                            else return true;
+                        },
+                        get orderstatestr(){
+                            switch (this.orderstate) {
+                                case 0://免费期
+                                case 1://预订购
+                                case 2://订购中，自动续费
+                                    return "会员";
+                                case 3://订购中，有截止日期
+                                    return "月底到期";
+                            }
+                            return "非会员";
+                        },
+                        change: []//用户信息变更执行
+                    };
+                    //$('.content-show').html('登录异常，请重新登录');
+                    $('body').append('<div class="content-show">登录异常，请重新登录</div>');
+                    window.location.reload();
+                }
+            });
+        };
+        //更新session信息
+        var update_session = function(data){
+            $.ajax({
+                url: "/proxy/v3/comkey.aspx",
+                data: data,
+                dataType: 'json',
+                cache: false,
+                type: 'get',
+                success: function (r) {
+                    $.extend(user, r);
+                }
+            });
+        };
+        //通知订购用户信息
+        var orderreport = function(type){
+            var data = {
+                cmd: 'open_orderreport',
+                spinfocode: temp_spinfocode,
+                orderid: serviceId,
+                type:type
+            };
+            $.ajax({
+                url: "/proxy/v3/proxy.aspx",
+                data: data,
+                dataType: 'json',
+                cache: false,
+                type: 'post',
+                success: function (r) {
+                    //$('.content-show').html(r.toString());
+                }
+            });
+        };
+    }
+    else{
+        //$('.content-show').html('手机号码不正确');
+        $('body').append('<div class="content-show">手机号码不正确</div>');
+
+    }
+
+
+</script>
+</body>
+</html>

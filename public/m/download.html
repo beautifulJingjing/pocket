@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no,email=no,adress=no">
+    <title>口袋铃声</title>
+    <script type="text/javascript" src="../javascripts/zepto.js"></script>
+    <style type="text/css">
+        *{ margin:0; padding:0;}
+        body{font:12px 'Arial'/*,'黑体'*/,'Microsoft Yahei','Simsun';color:#808080;background:#fff; min-width:320px; height:100%;}
+        body,div,p,a,li,ul,ol,span,input,dl,dd,dt,form,h1,h2,h3,h4,h5,h6,select,pre,img,textarea{padding:0;margin:0;outline:none;font-size:system;border:0 none;text-decoration:none;-webkit-tap-highlight-color:rgba(0, 0, 0, 0);}
+        form{display:inline}
+        ul,ol{list-style:none}
+        a{text-decoration:none;color:#808080;}
+        u{ text-decoration:none; color:#ef3a2d;}
+        img{ border:0; display:block; width:100%;}
+        button,input,select,textarea{font-size:100%;vertical-align:middle;outline:none;}
+        textarea{resize:none}
+        button,input[type="button"],input[type="reset"],input[type="submit"]{cursor:pointer;-webkit-appearance:button;-moz-appearance:button}
+        input {-webkit-user-select: text}
+        input:focus:-moz-placeholder,input:focus::-webkit-input-placeholder{color:transparent}
+        button::-moz-focus-inner,input::-moz-focus-inner{padding:0;border:0}
+        table{border-collapse:collapse;border-spacing:0}
+        header,footer,article,section,nav,menu{display:block;clear:all;}
+
+        .fl{float:left;}
+        .fr{float:right;}
+        .clear{clear:both;zoom:1;}
+        .clear:after {content:".";display:block;clear:both;height:0;visibility:hidden;}
+
+        .down-layer{width: 100%;position: relative;}
+        .down-layer-inner{display:block;height: 1.6rem;position: absolute;width: 88%;left: 6%;top: 50%;margin-top: -.8rem;}
+        .l-logo{height: 1.6rem;background: url("images/logo-down.png") left center no-repeat;background-size: 1.6rem;-webkit-background-size:1.6rem;font-size: .65rem;color: #000;line-height: .9rem;padding-left: 2rem}
+        .l-logo span{display: block;color: #999;font-size: .5rem}
+        .down-btn{border: .05rem solid #ff575f;display: inline-block;height: 1.6rem;box-sizing: border-box;-webkit-box-sizing: border-box; color: #ff575f;padding: 0 2.5rem;background: #fff;border-radius: .25rem;line-height: 1.6rem;font-size: .6rem}
+    </style>
+</head>
+<body>
+    <script>
+        var _winW = document.body.clientWidth || window.screen.width;
+        document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+    </script>
+    <div class="img-down"><img src="images/img-down.jpg"> </div>
+    <div class="down-layer">
+        <div class="down-layer-inner clear">
+            <div class="l-logo fl">口袋铃声<span>Ver1.0</span></div>
+            <a href="javascript:;" class="down-btn fr">下载APP</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        window.onload = function(){
+            $('.down-layer').css('height',$(window).height()-$('.img-down').height())
+        }
+
+        $(function(){
+            $('.down-btn').click(function(){
+                if (/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {  //判断iPhone|iPad|iPod|iOS
+                    window.location.href = "https://itunes.apple.com/us/app/kou-dai-ling-sheng/id1116910750?l=zh&ls=1&mt=8";
+                } else{
+                    window.location.href = "https://mt.ringbox.cn/d/apk/BoxRing_weibo.apk";
+                }
+            })
+        })
+    </script>
+</body>
+</html>

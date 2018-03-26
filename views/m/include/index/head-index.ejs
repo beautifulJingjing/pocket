@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
+<!--<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">-->
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<title><%= title %></title>
+<link rel="stylesheet" href="/m/stylesheets/basic.css">
+<script src="/javascripts/zepto.min.js"></script>
+<script src="/javascripts/iscroll.js"></script>
+<script type="text/javascript">
+    var temp_spinfocode = '<%- spinfocode %>';
+    var temp_isclick = <%- isclick %>;
+    var temp_config = <%- config %>;
+</script>
+</head>
+<body>
+<script>
+    //控制页面自适应
+    var _winW = document.body.clientWidth || window.screen.width;
+    document.getElementsByTagName('html')[0].style.fontSize = (_winW/640)*40+"px";
+
+    var migu_state=true,open_migu_sdk_state=true,diring_index_state=false,mobile_state=true,m2_m_state=true,payment_state=false,init_state=true;
+
+    function creatScript(url,state){
+        var head= document.getElementsByTagName('head')[0];
+        var _js= document.createElement('script');
+        _js.type= 'text/javascript';
+        _js.title=state;
+        _js.onload = _js.onreadystatechange = function() {
+            if (!this.readyState || this.readyState === "loaded" || this.readyState === "complete" ) {
+                if(_js.title)
+                    eval(_js.title+'=true');
+                _js.onload = _js.onreadystatechange = null;
+            }
+        };
+        _js.src= url;
+        head.appendChild(_js);
+    }
+    /*var migu = '/javascripts/migu.js';
+    if('https:'==document.location.protocol)
+//        migu = '/javascripts/migus.js';
+        migu = 'https://m.12530.com/order/pub-ui/js/and/migus.js';
+    creatScript(migu,'migu_state');*/
+    creatScript('/m/scripts/diring-index.js','');
+    //creatScript('/javascripts/openMusicSDK.js','open_migu_sdk_state');
+    creatScript('/m/scripts/payment.js','payment_state')
+
+    /*var _mobile_wait = setInterval(function () {
+        if(diring_index_state) {
+            clearInterval(_mobile_wait);
+            mobile_state = creatScript('/m/scripts/mobile_m.js','mobile_state');
+            m2_m_state = creatScript('/m/scripts/m2_m.js','m2_m_state');
+        }
+    }, 200);*/
+
+    //webjs初始化
+    var _head_wait = setInterval(function () {
+        if((migu_state && open_migu_sdk_state && diring_index_state && payment_state)) {
+            clearInterval(_head_wait);
+
+            //openMiGuInit("002100B");
+            init_state=true;
+        }
+    }, 200);
+
+</script>
+<div id="content-view">
+    <header class="head clear">
+        <% if(top.show) { %>
+        <div class="top">
+            <div class="l-info"><a href="/m/tem.html"><span class="icon-font iconfont-home"></span></a></div>
+            <div class="m-info"><!--口袋铃声--><span class="pocket-logo"></span></div>
+            <div class="r-info">
+                <!--<a href="/m/search.html" class="icon-font icon-iconfont-search"></a>-->
+                <a href="/m/usercenter.html" class="icon-font iconfont-user"></a>
+            </div>
+        </div>
+        <% } %>
+        <% if (back.show) { %>
+        <div class="back">
+            <a href="javascript:history.go(-1);"><span class="icon-font iconfont-back btn_back"></span></a>
+            <div class="backtitle"><%=back.title %></div>
+            <a href="help.html" class="help" style="display: none"></a>
+        </div>
+        <% } %>
+        <!--<div class="curnum clear">
+            <span class="fl">当前手机号：<b></b></span>
+        </div>-->
+    </header>
+    <div id="view">

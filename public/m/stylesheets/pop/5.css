@@ -1,0 +1,17 @@
+.main{background: #ffee78;padding-bottom: 1.25rem;}
+.ban{position: relative;z-index:1;}
+.ban:nth-child(2){padding-bottom: .5rem}
+.ban .ban-img{position: relative;z-index: 0}
+.ban a.lot-enter{width: 25%;position: absolute;height: 1.25rem;bottom: 30%;right: 17%;display: block;text-indent: -9999rem;}
+.page-bk{position: absolute;width: 88%;bottom: 0;left: 6%;}
+.get-num{width: 100%;color: #ef2e5c;font-size: .55rem;line-height: 1.2rem;height: 1.2rem;text-align: center}
+.getbtn-layer{width: 100%;margin: 0 auto;}
+.content-layer{width: 90%;margin: 0 auto;position: relative;background: #fff;}
+.ring-tit{width: 90%;margin: .25rem auto;text-align: center;color: #441414;background: #f5c924;height: 1.5rem;line-height: 1.5rem;font-size: .7rem;position: relative;z-index: 1}
+.ring-zs{height: .5rem;width: 92%;background: #df2954;border: .2rem solid #ef2e5c;margin: -.25rem auto 0;border-radius: .5rem;position: relative;z-index: 0;}
+.ring-list{margin: 0 auto;position: relative;z-index: 1;margin-top: -.25rem}
+.getBtn-layer{width: 90%;margin: 0 auto 15px;}
+.tips-layer{padding: .5rem .75rem 1rem;border-top: .05rem solid #f1f1f1;font-size: .55rem;color: #555;line-height: 1rem;width: 100%;box-sizing: border-box;-webkit-box-sizing: border-box}
+
+.float-layer{background: #fff;box-shadow: 0 0 5px rgba(0,0,0,.3);padding: 8px 0;position: fixed;left:0;right: 0;text-align: center;z-index: 997;opacity: 0;}
+.float-getbtn{width: 95%;margin: 0 auto;}

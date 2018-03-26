@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<title><%= title %></title>
+<link href="/m/stylesheets/basic.css" type="text/css" rel="stylesheet">
+<link href="/m/stylesheets/zt.css" type="text/css" rel="stylesheet">
+<script src="/javascripts/zepto.min.js"></script>
+<script src="/m/scripts/diring-index.js"></script>
+<style type="text/css">
+    .wrap{background: #e92922;padding-bottom: 20px}
+    .ban{position: relative;}
+    input::-webkit-input-placeholder{font-size: 17px;box-sizing: border-box;-webkit-box-sizing: border-box;line-height: 22px;}
+    .enter-layer{width: 80%;height: 45px;background: #fff;line-height: normal;margin: 0 auto;border: 3px solid #b02100;border-radius: 30px;margin-top: 20px;}
+    .enter-layer input{width: 70%;display: inline-block;height: 45px;padding: 5px 5px 5px 15px;box-sizing: border-box;-webkit-box-sizing: border-box;float: left;font-size: 17px;background: #fff;line-height: normal;border-radius: 30px 0 0 30px;vertical-align: middle}
+    .enter-layer button{width: 30%;display: inline-block;height: 45px;border-radius: 0 30px 30px 0;float: left;border: 0;background: #fdbf02;font-size: 18px;color: #eb2800;font-family: "Microsoft yahei";font-weight: 700}
+
+</style>
+</head>
+<body>
+<header class="header">
+    <div class="btn-back"><a href="javascript:history.back(-1);">返回</a> </div>
+    <div class="title"><%= title %></div>
+</header>
+<div class="wrap">
+    <div class="ban">
+        <img src="/m/images/zt/zt2/ban.jpg">
+    </div>
+    <div class="enter-layer">
+        <input type="tel" maxlength="11" placeholder="请输入手机号码" id="number">
+        <button id="btn">抽奖</button>
+    </div>
+    <div class="prize box-layer">
+        <div class="box-tit">活动奖品</div>
+        <div class="prize-con">
+            <ul>
+                <li class="clear"> <img src="/m/images/zt/500yuan.png">
+                    <div>
+                        <p>500元话费</p>
+                        <span>6份</span>
+                    </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/200yuan.png">
+                    <div>
+                        <p>200元话费</p>
+                        <span>12份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/100yuan.png">
+                    <div>
+                        <p>100元话费</p>
+                        <span>18份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/1G.png">
+                    <div>
+                        <p>1G流量</p>
+                        <span>60份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/30yuan.png">
+                    <div>
+                        <p>30元话费</p>
+                        <span>150份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/200M.png">
+                    <div>
+                        <p>200M流量</p>
+                        <span>600份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/10yuan.png">
+                    <div>
+                        <p>10元话费</p>
+                        <span>900份</span> </div>
+                </li>
+                <li class="clear"> <img src="/m/images/zt/30M.png">
+                    <div>
+                        <p>30M流量</p>
+                        <span>33,600份</span> </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="rule box-layer">
+        <div class="box-tit">活动规则</div>
+        <div class="rule-con">
+            <ul>
+                <li><span>1</span>活动时间：2017年1月1日-2017年6月30日；</li>
+                <li><span>2</span>活动期间，口袋铃声VIP会员，每月都有1次抽奖机会；</li>
+                <li><span>3</span>多次重复注册升级不可重复获得抽奖机会；</li>
+                <li><span>4</span>输入手机号码，点击抽奖，即可出现是否中奖的提示；</li>
+                <li><span>5</span>抽奖机会将在活动结束后失效；</li>
+                <li><span>6</span>活动奖品将在次月初的15个工作日内进行发放，我们将发送短信通知或由客服联系获奖者确认，请获奖者保持手机畅通。以下三种情况，将不予发放奖品：① 已取消口袋铃声服务的用户 ② 欠费停机用户 ③ 电话无人接听，3次联系不上获奖者将视为主动放弃奖品；</li>
+                <li><span>7</span>本次活动，仅限中国移动、中国电信、中国联通用户参加；</li>
+                <li><span>8</span>在法律许可范围内，口袋铃声对本活动具有解释权。</li>
+            </ul>
+        </div>
+    </div>
+    <div class="wined-list box-layer" id="wined">
+        <div class="box-tit">中奖名单</div>
+        <div>
+            <ul></ul>
+            <div class="showmore"><a href="javascript:;">显示更多</a></div>
+            <div class="no-con">
+                <p><img src="/m/images/zt/icon-none.png"> </p>
+                <p>还没人中奖，也许你是第一个！</p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer">
+    <section class="clear mt05em">
+        <div class="fl fotinfo" style="font-size: 12px;">
+            <p>客服电话：<span>4007200733</span></p>
+            <p>客服邮箱：<span>2689506586@qq.com</span></p>
+            <p>客服QQ：<span>2689506586</span></p>
+        </div>
+        <div class="fr">
+            <a href="/m/feedback.html" class="btn icon_feedback"><i class="iconfont-xl"></i>意见反馈</a>
+        </div>
+    </section>
+    <section class="clear mt05em brt wling-box">
+        <div class="fl ws_logo">
+            <img src="/m/images/ws_logo.png" class="fl">
+            <h3><b>微商铃</b>－您的专属商务彩铃顾问</h3>
+            <p>让客户听见你的声音</p>
+        </div>
+        <div class="fr footbtn"><a href="http://www.ringbox.com.cn/" target="_blank" class="btn">了解更多</a></div>
+    </section>
+    <section class="clear mt05em flow-box">
+        <a href="http://p.ringbox.cn/pay/flow/1001"> <img src="/m/images/ban-flow.jpg"></a>
+    </section>
+    <section class="copyright clear brt">
+        <div class="foot-logo"><img src="/m/images/logo-migu.png"><img src="/m/images/logo-wo.png"><img src="/m/images/logo-ai.png" class="logo-ai"> </div>
+        <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602000783" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;padding-top: 5px"><img src="/m/images/beian.png" style="float:left;width:auto;"/><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">浙公网安备 33010602001087号</p></a>
+        <p><a href="http://www.miitbeian.gov.cn/" target="_blank">浙B2-20100005-4&nbsp;&nbsp;&nbsp;&nbsp;杭州祖玛科技有限公司</a></p>
+    </section>
+</footer>
+<div id="user-tc"><!--弹窗 -->
+    <div class="tc-tit">温馨提示<em onclick="mbox.close()"></em></div>
+    <div class="cjbox">
+        <!--<p>亲爱的用户，你好！</p>-->
+        <div class="showcon"></div>
+        <input type="button" value="我知道啦~" class="btns" onClick="mbox.close()" />
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var lid=122;var temp_spinfocode,spinfocode=$.request('id');var temp_isclick='',temp_config='';var str=window.location.href;var _spinfocode=str.substring(str.length-11);$(function(){var mdbox=$('#wined').find('ul'),more=$('.showmore');var loading_log=false,tim=null,ul=mdbox.find('ul');function load_log(){if(loading_log)return;loading_log=true;var data={cmd:'get-lotterlog',lid:lid,start:mdbox.find('li').length,records:5};$.ajax({url:"/proxy/v3/proxy.aspx",data:data,dataType:'json',cache:false,type:'get',beforeSend:function(){more.show().find('a').text('加载中……').unbind('click')},success:function(r){if(r.s==1){if(r.data.list.length==0){if(data.start==0)$('.no-con').show().siblings().hide();else $('.no-con').hide().siblings().show()}else{$('.no-con').hide().siblings().show();for(var i in r.data.list){var d=r.data.list[i];mdbox.append('<li>{0}<span>获得了</span><em>{1}</em></li>'.format(d.phone,d.res_str))};if(data.records>r.data.list.length)more.hide();else more.show().find('a').text('显示更多……').click(load_log)}}},complete:function(){loading_log=false}})};load_log();var _lottering=false;var _lay=$('#user-tc'),_showcon=_lay.find('.showcon'),_btns=_lay.find('.btns');var number=$("#number");function lotter(){if($.trim(number.val())==""){_showcon.html('输入已注册手机号！');_btns.val('知道啦~').unbind('click').click(mbox.close);mbox.alert(_lay[0]);return};if(!/^[1][34578][0-9]{9}$/.test(number.val().trim())){_showcon.html('亲，别闹了，搞个正确的手机号码再来！');_btns.val('知道啦~').unbind('click').click(mbox.close);mbox.alert(_lay[0]);return};if(_lottering)return;_lottering=true;$.ajax({url:"/proxy/v3/proxy.aspx",data:{lid:lid,spinfocode:_spinfocode,cmd:'get-lotter',endtime:'2017-06-30',phone:escape($.trim(number.val()))},dataType:'json',cache:false,type:'post',success:function(r){if(r.s==1){if(r.data==''){if(r.validcount>=0){_showcon.html('哎呦，不好意思，啥也没抽中。继续加油哦，奖品多多，总会抽到的。');_btns.val('知道啦~').unbind('click').click(mbox.close)}}else{_showcon.html('恭喜你，抽中<span>'+r.data+'</span>！活动结束后15个工作日内，我们将派发奖品。以下三种情况，将不予发放奖品：① 已取消VIP会员服务的用户；② 欠费停机用户；③ 电话无人接听，3次联系不上获奖者将视为主动放弃奖品。');_btns.val('知道啦~').unbind('click').click(mbox.close)}}else if(r.s==-1){_showcon.html('哎呦，不好意思，您这个月已经抽过奖喽，下个月再来玩吧。');_btns.val('知道啦~').unbind('click').click(mbox.close)}else if(r.s==-3){_showcon.html('您还不是VIP会员，暂时无法参加抽奖哦。快去参加活动，升级VIP会员，再来抽奖吧。');_btns.val('去升级').unbind('click').click(function(){mbox.close();if(document.referrer.indexOf('/m/pop/'))location.href=document.referrer;else location.href='http://mt.ringbox.cn/m/pop/2,'+_spinfocode+'.html'})}else if(r.s==-4){_showcon.html('哎呦，不好意思，本次活动已经结束喽，下次活动再来玩吧。');_btns.val('知道啦~').unbind('click').click(mbox.close)}else{_showcon.html(r.msg);_btns.val('知道啦~').unbind('click').click(mbox.close)};mbox.alert(_lay[0])},complete:function(){_lottering=false}})};$('#btn').click(lotter);$('.icon_feedback').attr('href','/m/feedback,'+_spinfocode+'.html');var code_exp_031=/^(\d){7}031(\d)+$/;if(code_exp_031.test(_spinfocode))$('.flow-box,.wling-box').hide()});var _hmt=_hmt||[];(function(){var hm=document.createElement("script");hm.src="//hm.baidu.com/hm.js?b4ca733c06ecb9a6509182af92a65ef5";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm,s)})();
+</script>
+</html>

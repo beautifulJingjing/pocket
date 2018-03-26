@@ -1,0 +1,41 @@
+.back .help{background: url(/m/images/icon-help.png) center no-repeat;background-size: 1.3rem;-webkit-background-size: 1.3rem; width: 2rem; height: 2rem; left:auto;right: .15rem;}
+.main{background: #ededed;}
+.main .c {font-size: .6rem;color: #666;line-height: 1.1rem;padding-top: 1rem;}
+.main .c a.btn-change {display: block;width: 3.75rem;height: 1.5rem;line-height: 1.5rem;background: #ff5159;color: #fff;margin: .65rem 0;border-radius: 1rem;text-align: center;font-size: .6rem;padding: 0 .25rem;float: right;}
+.main .form{width: 90%;margin: 0 auto;background: #fff;padding: 0 5% 1rem}
+.main .form p {position: relative;height: 2rem;padding: .55rem 0 0;}
+/*.main .form p i{position: absolute;top: 8px;left: 0;display: inline-block;font-style: normal;text-align: center;width: 20px;height: 35px;line-height: 35px;font-size: 18px;}*/
+.main .form input::-webkit-input-placeholder {color: #9894a0;font-size: .7rem;}
+.main .form input {width: 100%;height: 2rem;background: #fff;box-sizing: border-box;-webkit-box-sizing: border-box;line-height: normal;font-size: .7rem;border: .05rem solid #dedede;border-radius: .2rem;padding: 0 .65rem}
+.main .form input.code {width: 57%;float: left;}
+.main .form a.btn-take {display: inline-block;float: right;width: 40%;height: 2rem;line-height: 2rem;border-radius: .2rem;;color: #f36257;text-align: center;box-sizing: border-box;border: .05rem solid #f36257;font-size: .6rem;}
+.main .form p.p-cur input{border: .05rem solid #ff5159}
+/*.main .form p.p-cur i{color: #ff5159}*/
+.main button {margin: 1rem auto 0;width: 100%;height: 2.2rem;line-height: 2.2rem;background: #ff5159;color: #fff;font-size: .75rem;text-align: center;border-radius: .2rem;border: none;font-family: "Microsoft yahei";display: block}
+.main .member{  background:#fff;}
+.main .member div{border-bottom: .05rem solid #e5e5e5;padding: 1rem 5rem 1rem 3.25rem;position: relative;box-sizing: border-box;-webkit-box-sizing: border-box;overflow: hidden;}
+.main .member img{position: absolute;top: 1rem;left: .75rem;width:2.25rem;height: 2.25rem;}
+.main .member p{font-size: .55rem;height: .8rem;line-height: .8rem;}
+.main .member h3{font-size: .65rem;color: #333;font-weight: 400;height: 1.2rem;line-height: 1.2rem;}
+.main .member p i{display: inline-block;width: .75rem;height:.6rem;background: url("images/icon-queen.png") bottom no-repeat;background-size: .75rem auto;-webkit-background-size: .75rem auto;margin-left: .25rem;}
+.main .member .btn-change{position: absolute;line-height: 1rem;top: 50%;right: .75rem; display: block;height: 1rem;padding: 0 .5rem;color: #50484b;margin-top: -.5rem;font-size: .55rem;border-left: .05rem solid #e6e6e6}
+.main .member button{margin: 1rem auto;width: 90%;display: none;height: 2.2rem;line-height: .75rem;background: #ff5159;color: #fff;font-size: .65rem;text-align: center;border-radius: .25rem;border: none;font-family: "Microsoft yahei";}
+.main .two-btn{width: 100%;display: none;}
+.main .two-btn .btn-cancle{background: #999;width: 48%;}
+.main .two-btn #changeOkBtn{width: 48%}
+.main .privilege{font-size: .6rem;color: #666;line-height: 1rem;width: 94%;padding:1rem 3% 0;}
+.explanation-layout{background: #ededed;font-size: .6rem;}
+.text-tit em{background: #ededed}
+.main .privilege h2{border-left: .25rem solid #ff5159;height: .75rem;line-height: .75rem;color: #333;padding-left: .5rem;font-size: .65rem;margin-bottom: 1rem;}
+.main .ring-library{background: #fff}
+.main .ring-library h2{height: 2rem;line-height: 2rem;color: #333;font-size: .65rem;border-bottom: .05rem solid #eaeaea;width: 94%;padding: 0 3%;font-weight: 400}
+.main .library-list{background: #fff}
+.set a.btn-del{width: 1.5rem;margin-left: .35rem;margin-right: .2rem;font-weight: 500}
+.set a.btn-setDefault{font-size: .55rem;width: auto;padding: 0 .35rem;}
+.set span{display: inline-block;height: 2rem;line-height: 2rem;font-size: .55rem;margin-right:.4rem}
+.musics .pinfo{margin-left: 2rem;padding-right: 5.5rem}
+.musics .pinfo p.name{line-height: 1rem}
+.main .mobile-library-list .musics,.main .mobileDefault-library-list .musics{padding: .3rem 0 .35rem 0;}
+.ringList-no{/*display: none;*/width: 100%;padding: .25rem 0 .5rem;text-align: center;color: #d8d8d8;font-size: 1.25rem;}
+.ringList-no span{font-size: 1.25rem;width:1.25rem;height: 1.25rem;line-height: 1.25rem;display: block;margin: 0 auto}
+.ringList-no p{font-size: .55rem}
